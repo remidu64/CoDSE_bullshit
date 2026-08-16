@@ -15,10 +15,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
 import remi.coDSE.utiliy.PlayerUtil;
+import remi.coDSE.data.SpawnData;
+
+import java.util.List;
 
 public class GeneralEvents implements Listener {
-
     CoDSE plugin = CoDSE.getInstance();
+
+    SpawnData spawnData = new SpawnData();
+    List<List<Integer>> spawns = spawnData.getSpawns();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -44,7 +49,6 @@ public class GeneralEvents implements Listener {
 
         event.setJoinMessage(joinMsg);
 
-
     }
 
     @EventHandler
@@ -54,7 +58,7 @@ public class GeneralEvents implements Listener {
 
     @EventHandler
     public void OnRespawn(PlayerRespawnEvent event) {
-        new BukkitRunnable() { // gotta wait one (1) tick before so the player loads
+        new BukkitRunnable() { // gotta wait one (1) tick so the player loads
             public void run() {
                 Player player = event.getPlayer();
                 player.addPotionEffect(PotionEffectType.SATURATION.createEffect(Integer.MAX_VALUE, 2));

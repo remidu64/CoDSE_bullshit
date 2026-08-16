@@ -14,8 +14,7 @@ public class StaminupCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (command.getName().equalsIgnoreCase("staminup")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 PlayerData data = PlayerUtil.getPlayerData(player);
                 data.setPerk(1);
 

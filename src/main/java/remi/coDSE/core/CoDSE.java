@@ -6,6 +6,7 @@ import remi.coDSE.commands.JuggernogCommand;
 import remi.coDSE.commands.QuickReviveCommand;
 import remi.coDSE.commands.StaminupCommand;
 import remi.coDSE.events.GeneralEvents;
+import remi.coDSE.data.SpawnData;
 
 import java.util.logging.Logger;
 
@@ -23,12 +24,13 @@ public final class CoDSE extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        CoDSE.getInstance().saveDefaultConfig();
+        this.saveDefaultConfig();
 
         loadCommands();
         loadEvents();
 
         logger.info("plugin is on :3");
+
     }
 
     @Override
