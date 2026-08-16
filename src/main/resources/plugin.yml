@@ -1,0 +1,23 @@
+name: CoDSE
+version: '${version}'
+
+main: remi.coDSE.core.CoDSE
+api-version: '1.20'
+
+load: STARTUP
+
+description: shit plugin held together with hopes and dreams
+author: remi
+
+commands:
+  staminup:
+    description: "you're faster"
+
+  juggernog:
+    description: "you're tankier"
+
+  quickrevive:
+    description: "you regen faster"
+
+  feathercurse:
+    description: "faster + slow fall but less health"
