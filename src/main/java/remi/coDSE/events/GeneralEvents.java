@@ -29,6 +29,18 @@ public class GeneralEvents implements Listener {
         SpawnListSize = SpawnLocations.size();
     }
 
+    public List<List<Integer>> getSpawnLocations() {
+        return SpawnLocations;
+    }
+
+    public void setSpawnLocations(List<List<Integer>> SpawnLocations) {
+        this.SpawnLocations = SpawnLocations;
+        this.SpawnListSize = SpawnLocations.size();
+        plugin.getConfig().set("spawns", SpawnLocations);
+        plugin.saveConfig();
+    }
+
+
     Random random = new Random();
 
     @EventHandler

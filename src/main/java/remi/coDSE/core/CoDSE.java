@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 public final class CoDSE extends JavaPlugin {
 
     private Logger logger = getLogger();
+    public GeneralEvents events = new GeneralEvents();
 
     private static CoDSE instance; // constructor bullshit
     public CoDSE() {
@@ -46,6 +47,6 @@ public final class CoDSE extends JavaPlugin {
 
     private void loadEvents() {
         logger.info("loading events");
-        getServer().getPluginManager().registerEvents(new GeneralEvents(), this);
+        getServer().getPluginManager().registerEvents(events, this);
     }
 }

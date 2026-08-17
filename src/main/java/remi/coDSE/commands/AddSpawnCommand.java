@@ -22,13 +22,13 @@ public class AddSpawnCommand implements CommandExecutor {
                 return false;
             }
 
-            @SuppressWarnings("unchecked") List<List<Integer>> SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns"); // what could possibly go wrong
+            List<List<Integer>> SpawnLocations = plugin.events.getSpawnLocations();
             List<Integer> Spawn = List.of(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 
             assert SpawnLocations != null;
             SpawnLocations.add(Spawn);
-            plugin.getConfig().set("spawns", SpawnLocations);
-            plugin.saveConfig();
+
+            plugin.events.setSpawnLocations(SpawnLocations);
 
             sender.sendMessage(ChatColor.GREEN + "Successfully added spawn location" + Spawn);
 
