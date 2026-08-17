@@ -14,8 +14,7 @@ public class JuggernogCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (command.getName().equalsIgnoreCase("juggernog")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 PlayerData data = PlayerUtil.getPlayerData(player);
 
                 data.setPerk(3);
@@ -25,11 +24,13 @@ public class JuggernogCommand implements CommandExecutor {
 
                 CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 3);
                 CoDSE.getInstance().saveConfig();
+                return true;
 
             } else {
                 sender.sendMessage("cant give perk to a non-player");
+                return false;
             }
-        }
-        return false;
+        } return false;
+
     }
 }

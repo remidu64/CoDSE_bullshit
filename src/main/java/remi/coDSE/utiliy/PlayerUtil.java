@@ -33,9 +33,9 @@ public class PlayerUtil {
     public static final PotionEffect base_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 1, false, false);
     public static final PotionEffect fast_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 3, false, false);
     public static final PotionEffect slow_fall = new PotionEffect(PotionEffectType.SLOW_FALLING, PotionEffect.INFINITE_DURATION, 0, false, false);
+    public static final PotionEffect saturation = new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, 0, false, false);
 
-
-    public static void ApplyPerk(int perk, Player player) {
+    public static void ApplyPerk(int perk, @NonNull Player player) {
         switch (perk) {
             case 1: //staminup -> speed+
                 player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15);
@@ -43,6 +43,7 @@ public class PlayerUtil {
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
+                player.addPotionEffect(saturation);
                 break;
 
             case 2: // quick revive -> regen+
@@ -51,6 +52,7 @@ public class PlayerUtil {
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(fast_regen);
+                player.addPotionEffect(saturation);
                 break;
 
             case 3: // juggernog -> health+
@@ -59,6 +61,7 @@ public class PlayerUtil {
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
+                player.addPotionEffect(saturation);
                 break;
 
             case 4: // feather's curse -> speed++, slow fall, health-
@@ -67,6 +70,7 @@ public class PlayerUtil {
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
                 player.addPotionEffect(slow_fall);
+                player.addPotionEffect(saturation);
                 break;
 
             default: // no perk :3
@@ -75,6 +79,7 @@ public class PlayerUtil {
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
+                player.addPotionEffect(saturation);
         }
     }
 }

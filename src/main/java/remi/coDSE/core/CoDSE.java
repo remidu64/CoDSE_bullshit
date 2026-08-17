@@ -1,12 +1,8 @@
 package remi.coDSE.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import remi.coDSE.commands.FeatherCurseCommand;
-import remi.coDSE.commands.JuggernogCommand;
-import remi.coDSE.commands.QuickReviveCommand;
-import remi.coDSE.commands.StaminupCommand;
+import remi.coDSE.commands.*;
 import remi.coDSE.events.GeneralEvents;
-import remi.coDSE.data.SpawnData;
 
 import java.util.logging.Logger;
 
@@ -44,6 +40,7 @@ public final class CoDSE extends JavaPlugin {
         getCommand("juggernog").setExecutor(new JuggernogCommand());
         getCommand("quickrevive").setExecutor(new QuickReviveCommand());
         getCommand("feathercurse").setExecutor(new FeatherCurseCommand());
+        getCommand("addspawn").setExecutor(new AddSpawnCommand());
 
     }
 

@@ -2,7 +2,6 @@ package remi.coDSE.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,20 +9,27 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
 import remi.coDSE.utiliy.PlayerUtil;
-import remi.coDSE.data.SpawnData;
+import remi.coDSE.utiliy.SpawnUtil;
 
 import java.util.List;
+import java.util.Random;
 
 public class GeneralEvents implements Listener {
     CoDSE plugin = CoDSE.getInstance();
 
-    SpawnData spawnData = new SpawnData();
-    List<List<Integer>> spawns = spawnData.getSpawns();
+    // type-safe casting ? i barely know her !
+    @SuppressWarnings("unchecked") private List<List<Integer>> SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
+    private int SpawnListSize;
+    {
+        assert SpawnLocations != null;
+        SpawnListSize = SpawnLocations.size();
+    }
+
+    Random random = new Random();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -44,7 +50,7 @@ public class GeneralEvents implements Listener {
 
         PlayerUtil.setPlayerData(player, data);
 
-        String joinMsg = "%player% joined the hellhole" + ChatColor.YELLOW;
+        String joinMsg =  ChatColor.YELLOW +"%player% joined the hellhole";
         joinMsg = joinMsg.replaceAll("%player%", player.getName());
 
         event.setJoinMessage(joinMsg);
@@ -61,15 +67,16 @@ public class GeneralEvents implements Listener {
         new BukkitRunnable() { // gotta wait one (1) tick so the player loads
             public void run() {
                 Player player = event.getPlayer();
-                player.addPotionEffect(PotionEffectType.SATURATION.createEffect(Integer.MAX_VALUE, 2));
 
                 int perk = PlayerUtil.getPlayerData(player).getPerk();
                 PlayerUtil.ApplyPerk(perk, player);
 
                 player.setGameMode(GameMode.ADVENTURE);
 
-                Location spawn =  new Location(player.getWorld(), 10000.0, 31, 10000.0);
-                player.teleport(spawn);
+                List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
+                SpawnUtil.Respawn(player, SpawnLocation.get(0) + 0.5, SpawnLocation.get(1), SpawnLocation.get(2) + 0.5);
+
+
             }
         }.runTaskLater(CoDSE.getInstance(), 1);
 

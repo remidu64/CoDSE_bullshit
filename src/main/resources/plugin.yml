@@ -21,3 +21,6 @@ commands:
 
   feathercurse:
     description: "faster + slow fall but less health"
+
+  addspawn:
+    description: "add new spawn (3 arguments required)"

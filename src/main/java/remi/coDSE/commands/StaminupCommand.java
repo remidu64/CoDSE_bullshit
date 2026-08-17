@@ -24,11 +24,12 @@ public class StaminupCommand implements CommandExecutor {
 
                 CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 1);
                 CoDSE.getInstance().saveConfig();
+                return true;
 
             } else {
                 sender.sendMessage("cant give perk to a non-player");
+                return false;
             }
-        }
-        return false;
+        } return false;
     }
 }
