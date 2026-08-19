@@ -22,7 +22,7 @@ public class QuickReviveCommand implements CommandExecutor {
 
                 PlayerUtil.ApplyPerk(2, player);
 
-                CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 2);
+                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 2);
                 CoDSE.getInstance().saveConfig();
                 return true;
 

@@ -42,6 +42,8 @@ public final class CoDSE extends JavaPlugin {
         getCommand("quickrevive").setExecutor(new QuickReviveCommand());
         getCommand("feathercurse").setExecutor(new FeatherCurseCommand());
         getCommand("addspawn").setExecutor(new AddSpawnCommand());
+        getCommand("medic").setExecutor(new MedicCommand());
+        getCommand("reloadspawns").setExecutor(new ReloadSpawnsCommand());
 
     }
 

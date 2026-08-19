@@ -24,3 +24,9 @@ commands:
 
   addspawn:
     description: "add new spawn (3 arguments required)"
+
+  medic:
+    description: "command for a gun"
+
+  reloadspawns:
+    description: "reload spawn location from file"

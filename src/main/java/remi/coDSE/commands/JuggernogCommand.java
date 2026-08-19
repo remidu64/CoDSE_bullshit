@@ -22,7 +22,7 @@ public class JuggernogCommand implements CommandExecutor {
 
                 PlayerUtil.ApplyPerk(3, player);
 
-                CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 3);
+                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 3);
                 CoDSE.getInstance().saveConfig();
                 return true;
 

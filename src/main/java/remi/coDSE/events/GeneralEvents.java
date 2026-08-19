@@ -39,6 +39,9 @@ public class GeneralEvents implements Listener {
         plugin.getConfig().set("spawns", SpawnLocations);
         plugin.saveConfig();
     }
+    public void reloadSpawnLocations() {
+        this.SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
+    }
 
 
     Random random = new Random();
@@ -48,10 +51,10 @@ public class GeneralEvents implements Listener {
         Player player = event.getPlayer();
         PlayerData data = new PlayerData();
 
-        int saved_perk = plugin.getConfig().getInt(player.getName() + ".perk");
+        int saved_perk = plugin.getConfig().getInt(player.getUniqueId() + ".perk");
 
         if (saved_perk == 0) { // saved_perk being 0 means the player joined for the first time, gotta add config for em
-            plugin.getConfig().set(player.getName() + ".perk", -1);
+            plugin.getConfig().set(player.getUniqueId() + ".perk", -1);
             plugin.saveConfig();
             data.setPerk(-1);
         } else {

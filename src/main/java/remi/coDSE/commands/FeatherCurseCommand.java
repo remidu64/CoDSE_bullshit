@@ -23,7 +23,7 @@ public class FeatherCurseCommand implements CommandExecutor {
 
                 PlayerUtil.ApplyPerk(4, player);
 
-                CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 4);
+                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 4);
                 CoDSE.getInstance().saveConfig();
                 return true;
 

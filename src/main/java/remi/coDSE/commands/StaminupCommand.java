@@ -22,7 +22,7 @@ public class StaminupCommand implements CommandExecutor {
 
                 PlayerUtil.ApplyPerk(1, player);
 
-                CoDSE.getInstance().getConfig().set(player.getName() + ".perk", 1);
+                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 1);
                 CoDSE.getInstance().saveConfig();
                 return true;
 

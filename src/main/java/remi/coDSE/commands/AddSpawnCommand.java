@@ -18,7 +18,7 @@ public class AddSpawnCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("addspawn")) {
             if (args.length != 3) {
-                sender.sendMessage(ChatColor.RED + "Error: Incorrect amount of arguments provided (3 expected, " + args.length + "provided)");
+                sender.sendMessage(ChatColor.RED + "Error: Incorrect amount of arguments provided (3 expected, " + args.length + " provided)");
                 return false;
             }
 
@@ -30,7 +30,7 @@ public class AddSpawnCommand implements CommandExecutor {
 
             plugin.events.setSpawnLocations(SpawnLocations);
 
-            sender.sendMessage(ChatColor.GREEN + "Successfully added spawn location" + Spawn);
+            sender.sendMessage(ChatColor.GREEN + "Successfully added spawn location at " + Spawn);
 
             return true;
 
