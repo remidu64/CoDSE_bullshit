@@ -2,6 +2,7 @@ package remi.coDSE.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import remi.coDSE.commands.*;
+import remi.coDSE.events.ArmorPlateSound;
 import remi.coDSE.events.GeneralEvents;
 
 import java.util.logging.Logger;
@@ -51,5 +52,6 @@ public final class CoDSE extends JavaPlugin {
         logger.info("loading events");
         this.events = new GeneralEvents();
         getServer().getPluginManager().registerEvents(events, this);
+        getServer().getPluginManager().registerEvents(new ArmorPlateSound(), this);
     }
 }

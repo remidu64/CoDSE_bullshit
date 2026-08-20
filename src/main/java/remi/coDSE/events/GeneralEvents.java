@@ -93,7 +93,7 @@ public class GeneralEvents implements Listener {
 
 
             }
-        }.runTaskLater(CoDSE.getInstance(), 1);
+        }.runTask(CoDSE.getInstance());
 
     }
 
@@ -112,4 +112,5 @@ public class GeneralEvents implements Listener {
         victim_data.setKills(0);
 
     }
+
 }
