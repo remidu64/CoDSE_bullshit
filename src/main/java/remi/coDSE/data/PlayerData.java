@@ -4,9 +4,7 @@ public class PlayerData {
     private int perk;
     private int kills;
 
-    public int getPerk() {
-        return perk;
-    }
+    public int getPerk() {return perk;}
 
     public void setPerk(int perk) {
         this.perk = perk;
@@ -18,5 +16,9 @@ public class PlayerData {
 
     public void setKills(int kills) {
         this.kills = kills;
+    }
+
+    public void incrementKills() {
+        this.kills++;
     }
 }

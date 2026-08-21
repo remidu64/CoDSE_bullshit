@@ -10,7 +10,11 @@ import remi.coDSE.data.PlayerData;
 import java.util.HashMap;
 import java.util.Map;
 
+// this class mostly contains random bullshit related to players
+
 public class PlayerUtil {
+
+    // PlayerData functions
     private static Map<String, PlayerData> PlayerData = new HashMap<>();
 
     public static PlayerData getPlayerData(@NonNull Player player) {
@@ -29,11 +33,15 @@ public class PlayerUtil {
         else PlayerData.put(player.getUniqueId().toString(), data);
     }
 
+
+
+    // perk shenanigans
+
     // defining premade potion effects
-    public static final PotionEffect base_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 1, false, false);
-    public static final PotionEffect fast_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 3, false, false);
-    public static final PotionEffect slow_fall = new PotionEffect(PotionEffectType.SLOW_FALLING, PotionEffect.INFINITE_DURATION, 0, false, false);
-    public static final PotionEffect saturation = new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, 0, false, false);
+    private static final PotionEffect base_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 1, false, false);
+    private static final PotionEffect fast_regen = new PotionEffect(PotionEffectType.REGENERATION, PotionEffect.INFINITE_DURATION, 3, false, false);
+    private static final PotionEffect slow_fall = new PotionEffect(PotionEffectType.SLOW_FALLING, PotionEffect.INFINITE_DURATION, 0, false, false);
+    private static final PotionEffect saturation = new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, 0, false, false);
 
     public static void ApplyPerk(int perk, @NonNull Player player) {
         switch (perk) {

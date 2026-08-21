@@ -1,9 +1,11 @@
 package remi.coDSE.commands;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 import remi.coDSE.core.CoDSE;
 
 import java.util.List;
@@ -15,22 +17,22 @@ public class AddSpawnCommand implements CommandExecutor {
     CoDSE plugin = CoDSE.getInstance();
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if (command.getName().equalsIgnoreCase("addspawn")) {
             if (args.length != 3) {
-                sender.sendMessage(ChatColor.RED + "Error: Incorrect amount of arguments provided (3 expected, " + args.length + " provided)");
+                sender.sendMessage(Component.text("Error: Incorrect amount of arguments provided (3 expected, " + args.length + " provided)", TextColor.color(255, 0, 0)));
                 return false;
             }
 
-            List<List<Integer>> SpawnLocations = plugin.events.getSpawnLocations();
+            List<List<Integer>> SpawnLocations = plugin.DRevents.getSpawnLocations();
             List<Integer> Spawn = List.of(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 
             assert SpawnLocations != null;
             SpawnLocations.add(Spawn);
 
-            plugin.events.setSpawnLocations(SpawnLocations);
+            plugin.DRevents.setSpawnLocations(SpawnLocations);
 
-            sender.sendMessage(ChatColor.GREEN + "Successfully added spawn location at " + Spawn);
+            sender.sendMessage(Component.text("Successfully added spawn location at " + Spawn, TextColor.color(0, 255, 0)));
 
             return true;
 

@@ -2,15 +2,18 @@ package remi.coDSE.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import remi.coDSE.commands.*;
-import remi.coDSE.events.ArmorPlateSound;
-import remi.coDSE.events.GeneralEvents;
+import remi.coDSE.events.DamageEvents;
+import remi.coDSE.events.DeathAndRespawnEvents;
+import remi.coDSE.events.JoinAndLeaveEvents;
 
 import java.util.logging.Logger;
 
 public final class CoDSE extends JavaPlugin {
 
     private Logger logger = getLogger();
-    public GeneralEvents events;
+
+    public JoinAndLeaveEvents JLevents;
+    public DeathAndRespawnEvents DRevents;
 
     private static CoDSE instance; // constructor bullshit
     public CoDSE() {
@@ -50,8 +53,12 @@ public final class CoDSE extends JavaPlugin {
 
     private void loadEvents() {
         logger.info("loading events");
-        this.events = new GeneralEvents();
-        getServer().getPluginManager().registerEvents(events, this);
-        getServer().getPluginManager().registerEvents(new ArmorPlateSound(), this);
+
+        this.JLevents = new JoinAndLeaveEvents();
+        this.DRevents = new DeathAndRespawnEvents();
+
+        getServer().getPluginManager().registerEvents(JLevents, this);
+        getServer().getPluginManager().registerEvents(DRevents, this);
+        getServer().getPluginManager().registerEvents(new DamageEvents(), this);
     }
 }
