@@ -29,6 +29,7 @@ public class DeathAndRespawnEvents implements Listener {
     @SuppressWarnings("unchecked") private List<List<Integer>> SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
     private int SpawnListSize;
     {
+        KillUtil.SetupArmor();
         assert SpawnLocations != null;
         SpawnListSize = SpawnLocations.size();
     }
@@ -73,12 +74,11 @@ public class DeathAndRespawnEvents implements Listener {
     public void onDeath(@NotNull PlayerDeathEvent event) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
-        if (killer != null) { // victim can have a brain aneurysm, dont want that to cause a crash
+        if (killer != null && killer != victim) { // victim can have a brain aneurysm, dont want that to cause a crash
             PlayerData killer_data = PlayerUtil.getPlayerData(killer);
-            KillUtil.HandlePointsAndShit(killer, killer_data.getKills());
             killer_data.incrementKills();
             PlayerUtil.setPlayerData(killer, killer_data);
-
+            KillUtil.HandlePointsAndShit(killer, killer_data.getKills());
         }
         PlayerData victim_data = PlayerUtil.getPlayerData(victim);
         victim_data.setKills(0);

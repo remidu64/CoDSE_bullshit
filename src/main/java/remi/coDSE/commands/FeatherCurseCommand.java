@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
 import remi.coDSE.utiliy.PlayerUtil;
@@ -11,7 +12,7 @@ import remi.coDSE.utiliy.PlayerUtil;
 public class FeatherCurseCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
 
         if (command.getName().equalsIgnoreCase("feathercurse")) {
             if (sender instanceof Player player) {

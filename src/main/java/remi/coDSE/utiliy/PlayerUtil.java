@@ -9,20 +9,20 @@ import remi.coDSE.data.PlayerData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 // this class mostly contains random bullshit related to players
 
 public class PlayerUtil {
 
     // PlayerData functions
-    private static Map<String, PlayerData> PlayerData = new HashMap<>();
+    private static final Map<String, PlayerData> PlayerData = new HashMap<>();
 
     public static PlayerData getPlayerData(@NonNull Player player) {
         if(!PlayerData.containsKey(player.getUniqueId().toString())) {
             PlayerData data = new PlayerData();
             PlayerData.put(player.getUniqueId().toString(), data);
             return data;
-
         }
         return PlayerData.get(player.getUniqueId().toString());
 
@@ -46,8 +46,8 @@ public class PlayerUtil {
     public static void ApplyPerk(int perk, @NonNull Player player) {
         switch (perk) {
             case 1: //staminup -> speed+
-                player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.15);
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(60);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.15);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(60);
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
@@ -55,8 +55,8 @@ public class PlayerUtil {
                 break;
 
             case 2: // quick revive -> regen+
-                player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.102);
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(60);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.102);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(60);
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(fast_regen);
@@ -64,8 +64,8 @@ public class PlayerUtil {
                 break;
 
             case 3: // juggernog -> health+
-                player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.102);
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(80);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.102);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(80);
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
@@ -73,8 +73,8 @@ public class PlayerUtil {
                 break;
 
             case 4: // feather's curse -> speed++, slow fall, health-
-                player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.175);
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.175);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(40);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
                 player.addPotionEffect(slow_fall);
@@ -82,8 +82,8 @@ public class PlayerUtil {
                 break;
 
             default: // no perk :3
-                player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.102);
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(60);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.102);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(60);
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(base_regen);
