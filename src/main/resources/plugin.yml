@@ -26,7 +26,10 @@ commands:
     description: "add new spawn (3 arguments required)"
 
   medic:
-    description: "command for a gun"
+    description: "command for a gun (shouldn't be used in normal gameplay)"
 
   reloadspawns:
     description: "reload spawn location from file"
+
+  respawn:
+    description: "respawns a player"

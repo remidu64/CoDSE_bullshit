@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import remi.coDSE.core.CoDSE;
+import remi.coDSE.utiliy.SpawnUtil;
 
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class AddSpawnCommand implements CommandExecutor {
                 return false;
             }
 
-            List<List<Integer>> SpawnLocations = plugin.DRevents.getSpawnLocations();
+            List<List<Integer>> SpawnLocations = SpawnUtil.getSpawnLocations();
             List<Integer> Spawn = List.of(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 
             assert SpawnLocations != null;
             SpawnLocations.add(Spawn);
 
-            plugin.DRevents.setSpawnLocations(SpawnLocations);
+            SpawnUtil.setSpawnLocations(SpawnLocations);
 
             sender.sendMessage(Component.text("Successfully added spawn location at " + Spawn, TextColor.color(0, 255, 0)));
 

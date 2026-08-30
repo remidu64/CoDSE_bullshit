@@ -44,7 +44,7 @@ public class KillUtil {
     static final ItemStack t2helmet = new ItemStack(Material.DIAMOND_HELMET);
     static final ItemStack t2chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 
-    public static void SetupArmor() {
+    static {
         Damageable meta = (Damageable) reactive_armor.getItemMeta();
         meta.displayName(Component.text("Reactive armor", TextColor.fromHexString("#ff55ff")));
         meta.addEnchant(Enchantment.THORNS, 3, false);

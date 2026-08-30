@@ -31,6 +31,6 @@ public class StaminupCommand implements CommandExecutor {
                 sender.sendMessage("cant give perk to a non-player");
                 return false;
             }
-        } return false;
+    } return false;
     }
 }

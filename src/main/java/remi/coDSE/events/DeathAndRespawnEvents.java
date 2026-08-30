@@ -25,48 +25,12 @@ import java.util.Random;
 public class DeathAndRespawnEvents implements Listener {
     CoDSE plugin = CoDSE.getInstance();
 
-    // type-safe casting ? i barely know her !
-    @SuppressWarnings("unchecked") private List<List<Integer>> SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
-    private int SpawnListSize;
-    {
-        KillUtil.SetupArmor();
-        assert SpawnLocations != null;
-        SpawnListSize = SpawnLocations.size();
-    }
-
-    public List<List<Integer>> getSpawnLocations() {
-        return SpawnLocations;
-    }
-
-    public void setSpawnLocations(@NotNull List<List<Integer>> SpawnLocations) {
-        this.SpawnLocations = SpawnLocations;
-        this.SpawnListSize = SpawnLocations.size();
-        plugin.getConfig().set("spawns", SpawnLocations);
-        plugin.saveConfig();
-    }
-    public void reloadSpawnLocations() {
-        this.SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
-    }
-
-
     Random random = new Random();
 
     @EventHandler
     public void OnRespawn(@NotNull PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-
-        int perk = PlayerUtil.getPlayerData(player).getPerk();
-
-
-        player.setGameMode(GameMode.ADVENTURE);
-
-        List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
-        new BukkitRunnable() { // gotta wait one (1) tick so the player loads
-            public void run() {
-                SpawnUtil.Respawn(player, SpawnLocation.get(0) + 0.5, SpawnLocation.get(1), SpawnLocation.get(2) + 0.5);
-                PlayerUtil.ApplyPerk(perk, player);
-            }
-        }.runTask(CoDSE.getInstance());
+        SpawnUtil.Respawn(player);
 
     }
 

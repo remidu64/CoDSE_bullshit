@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import remi.coDSE.core.CoDSE;
+import remi.coDSE.utiliy.SpawnUtil;
 
 
 public class ReloadSpawnsCommand implements CommandExecutor {
@@ -14,7 +15,7 @@ public class ReloadSpawnsCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if (command.getName().equalsIgnoreCase("reloadspawns")) {
 
-            plugin.DRevents.reloadSpawnLocations();
+            SpawnUtil.reloadSpawnLocations();
 
             return true;
 

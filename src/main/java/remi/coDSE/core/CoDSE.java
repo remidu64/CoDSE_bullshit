@@ -7,6 +7,7 @@ import remi.coDSE.commands.*;
 import remi.coDSE.events.DamageEvents;
 import remi.coDSE.events.DeathAndRespawnEvents;
 import remi.coDSE.events.JoinAndLeaveEvents;
+import remi.coDSE.utiliy.KillUtil;
 import remi.coDSE.utiliy.ScoreboardUtil;
 
 import java.util.Objects;
@@ -15,9 +16,6 @@ import java.util.logging.Logger;
 public final class CoDSE extends JavaPlugin {
 
     private final Logger logger = getLogger();
-
-    public JoinAndLeaveEvents JLevents;
-    public DeathAndRespawnEvents DRevents;
 
     private static CoDSE instance; // constructor bullshit
     public CoDSE() {
@@ -62,17 +60,16 @@ public final class CoDSE extends JavaPlugin {
         Objects.requireNonNull(getCommand("addspawn")).setExecutor(new AddSpawnCommand());
         Objects.requireNonNull(getCommand("medic")).setExecutor(new MedicCommand());
         Objects.requireNonNull(getCommand("reloadspawns")).setExecutor(new ReloadSpawnsCommand());
+        Objects.requireNonNull(getCommand("respawn")).setExecutor(new RespawnCommand());
+        logger.info("commands loaded");
 
     }
 
     private void loadEvents() {
         logger.info("loading events");
-
-        this.JLevents = new JoinAndLeaveEvents();
-        this.DRevents = new DeathAndRespawnEvents();
-
-        getServer().getPluginManager().registerEvents(JLevents, this);
-        getServer().getPluginManager().registerEvents(DRevents, this);
+        getServer().getPluginManager().registerEvents(new JoinAndLeaveEvents(), this);
+        getServer().getPluginManager().registerEvents(new DeathAndRespawnEvents(), this);
         getServer().getPluginManager().registerEvents(new DamageEvents(), this);
+        logger.info("events loaded");
     }
 }
