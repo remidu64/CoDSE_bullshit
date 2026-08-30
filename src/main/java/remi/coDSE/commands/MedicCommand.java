@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class MedicCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if (command.getName().equalsIgnoreCase("medic")) {
@@ -21,11 +23,11 @@ public class MedicCommand implements CommandExecutor {
             }
 
             double hp = player.getHealth();
-            if  (hp <= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()-32) {
+            if  (hp <= Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()-32) {
                 player.setHealth(player.getHealth()+32);
             }
             else {
-                player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
             }
 
             player.playSound(player.getLocation(), "minecraft:misc.medic", 0.6f, 1f);

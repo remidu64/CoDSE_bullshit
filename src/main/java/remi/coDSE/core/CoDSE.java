@@ -7,7 +7,6 @@ import remi.coDSE.commands.*;
 import remi.coDSE.events.DamageEvents;
 import remi.coDSE.events.DeathAndRespawnEvents;
 import remi.coDSE.events.JoinAndLeaveEvents;
-import remi.coDSE.utiliy.KillUtil;
 import remi.coDSE.utiliy.ScoreboardUtil;
 
 import java.util.Objects;
