@@ -1,5 +1,8 @@
 package remi.coDSE.commands;
 
+import com.earth2me.essentials.api.NoLoanPermittedException;
+import com.earth2me.essentials.api.UserDoesNotExistException;
+import net.ess3.api.MaxMoneyException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
@@ -9,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.KillUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
 public class SetKillstreakCommand implements CommandExecutor {
@@ -33,6 +37,11 @@ public class SetKillstreakCommand implements CommandExecutor {
                 PlayerData data = PlayerUtil.getPlayerData(player);
                 data.setKills(kill);
                 PlayerUtil.setPlayerData(player, data);
+                try {
+                    KillUtil.HandlePointsAndShit(player, kill);
+                } catch (MaxMoneyException | NoLoanPermittedException | UserDoesNotExistException e) {
+                    throw new RuntimeException(e);
+                }
                 sender.sendMessage(Component.text("Successfully set " + args[0] + "'s killstreak to " + args[1], TextColor.color(0, 255, 0)));
 
                 return true;
