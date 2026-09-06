@@ -225,7 +225,7 @@ public class KillUtil {
                 player.sendMessage(Component.text("+Panzerfaust 30 ", TextColor.fromHexString("#E4C04B")));
             }
             if (kills % 15 == 0) {
-                WeaponMechanicsAPI.giveWeapon("mgb",  player);
+                WeaponMechanicsAPI.giveWeapon("MGB",  player);
                 player.sendMessage(Component.text("+MGB ", TextColor.fromHexString("#383327")));
             }
             if (kills % 30 == 0) {
