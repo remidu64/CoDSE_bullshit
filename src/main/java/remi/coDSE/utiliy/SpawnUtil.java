@@ -45,7 +45,7 @@ public class SpawnUtil {
         List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
         new BukkitRunnable() { // gotta wait one (1) tick so the player loads
             public void run() {
-                player.teleport(new Location(player.getWorld(), SpawnLocation.get(0), SpawnLocation.get(1), SpawnLocation.get(2)));
+                player.teleport(new Location(player.getWorld(), SpawnLocation.get(0)+0.5, SpawnLocation.get(1), SpawnLocation.get(2)+0.5));
                 PlayerUtil.ApplyPerk(perk, player);
             }
         }.runTask(CoDSE.getInstance());

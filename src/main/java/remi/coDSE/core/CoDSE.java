@@ -60,6 +60,7 @@ public final class CoDSE extends JavaPlugin {
         Objects.requireNonNull(getCommand("medic")).setExecutor(new MedicCommand());
         Objects.requireNonNull(getCommand("reloadspawns")).setExecutor(new ReloadSpawnsCommand());
         Objects.requireNonNull(getCommand("respawn")).setExecutor(new RespawnCommand());
+        Objects.requireNonNull(getCommand("setkillstreak")).setExecutor(new SetKillstreakCommand());
         logger.info("commands loaded");
 
     }

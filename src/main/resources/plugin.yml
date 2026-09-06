@@ -12,24 +12,36 @@ author: remi
 commands:
   staminup:
     description: "you're faster"
+    permission: codse.staminup
 
   juggernog:
     description: "you're tankier"
+    permission: codse.quickjuggernog
 
   quickrevive:
     description: "you regen faster"
+    permission: codse.quickrevive
 
   feathercurse:
     description: "faster + slow fall but less health"
+    permission: codse.feathercurse
 
   addspawn:
-    description: "add new spawn (3 arguments required)"
+    description: "add new spawn (/addspawn X Y Z)"
+    permission: codse.admin.addspawn
 
   medic:
     description: "command for a gun (shouldn't be used in normal gameplay)"
+    permission: codse.gameplay.medic
 
   reloadspawns:
     description: "reload spawn location from file"
+    permission: codse.admin.reloadspawns
 
   respawn:
     description: "respawns a player"
+    permission: codse.admin.respawn
+
+  setkillstreak:
+    description: "sets a player's killstreak (/setkillstreak PLAYER NEW_KILLSTREAK)"
+    permission: codse.admin.setkillstreak
