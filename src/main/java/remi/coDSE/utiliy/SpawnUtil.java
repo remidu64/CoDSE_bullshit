@@ -33,7 +33,7 @@ public class SpawnUtil {
         plugin.getConfig().set("spawns", NewSpawnLocations);
         plugin.saveConfig();
     }
-    public static void reloadSpawnLocations() {
+    @SuppressWarnings("unchecked") public static void reloadSpawnLocations() {
         SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
     }
 

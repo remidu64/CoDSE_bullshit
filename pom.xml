@@ -49,7 +49,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <outputDirectory>/mnt/terabyte/CODSE_Servers/CODSE1206/plugins/</outputDirectory>
+                    <outputDirectory>/mnt/terabyte/CODSE_Servers/CODSE1214/plugins/</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -103,13 +103,18 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.20.6-R0.1-SNAPSHOT</version>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>fr.mrmicky</groupId>
             <artifactId>fastboard</artifactId>
             <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
     </dependencies>
 

@@ -1,8 +1,8 @@
 name: CoDSE
-version: '${version}'
+version: '1'
 
 main: remi.coDSE.core.CoDSE
-api-version: '1.20'
+api-version: '1.21.4'
 
 load: STARTUP
 
@@ -16,7 +16,7 @@ commands:
 
   juggernog:
     description: "you're tankier"
-    permission: codse.quickjuggernog
+    permission: codse.juggernog
 
   quickrevive:
     description: "you regen faster"
@@ -45,3 +45,11 @@ commands:
   setkillstreak:
     description: "sets a player's killstreak (/setkillstreak PLAYER NEW_KILLSTREAK)"
     permission: codse.admin.setkillstreak
+
+  deadshotdaiquiri:
+    description: "higher headshot damage"
+    permission: codse.deadshotdaiquiri
+
+  ddtrigger:
+    description: "deadshot daiquiri trigger command (shouldn't be used in normal gameplay)"
+    permission: codse.gameplay.ddt

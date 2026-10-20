@@ -61,6 +61,8 @@ public final class CoDSE extends JavaPlugin {
         Objects.requireNonNull(getCommand("reloadspawns")).setExecutor(new ReloadSpawnsCommand());
         Objects.requireNonNull(getCommand("respawn")).setExecutor(new RespawnCommand());
         Objects.requireNonNull(getCommand("setkillstreak")).setExecutor(new SetKillstreakCommand());
+        Objects.requireNonNull(getCommand("deadshotdaiquiri")).setExecutor(new DeadshotDaiquiriCommand());
+        Objects.requireNonNull(getCommand("ddtrigger")).setExecutor(new DeadshotDaiquiriTriggerCommand());
         logger.info("commands loaded");
 
     }

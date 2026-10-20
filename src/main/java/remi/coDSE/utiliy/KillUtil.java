@@ -11,6 +11,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -49,8 +50,8 @@ public class KillUtil {
         meta.displayName(Component.text("Reactive armor", TextColor.fromHexString("#ff55ff")));
         meta.addEnchant(Enchantment.THORNS, 3, false);
         meta.addEnchant(Enchantment.UNBREAKING, 3, false);
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("armor", 10, AttributeModifier.Operation.ADD_NUMBER));
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier("t", 20, AttributeModifier.Operation.ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.ARMOR, new AttributeModifier(new NamespacedKey("remi", "armor"), 10, AttributeModifier.Operation.ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.ARMOR_TOUGHNESS, new AttributeModifier(new NamespacedKey("remi", "toughness"), 20, AttributeModifier.Operation.ADD_NUMBER));
         meta.setMaxDamage(15);
         reactive_armor.setItemMeta(meta);
 

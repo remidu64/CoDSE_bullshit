@@ -1,0 +1,37 @@
+package remi.coDSE.commands;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
+import remi.coDSE.core.CoDSE;
+import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.PlayerUtil;
+
+public class DeadshotDaiquiriCommand implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
+
+        if (command.getName().equalsIgnoreCase("deadshotdaiquiri")) {
+            if (sender instanceof Player player) {
+                PlayerData data = PlayerUtil.getPlayerData(player);
+                data.setPerk(5);
+
+                PlayerUtil.setPlayerData(player, data);
+
+                PlayerUtil.ApplyPerk(5, player);
+
+                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 5);
+                CoDSE.getInstance().saveConfig();
+                return true;
+
+            } else {
+                sender.sendMessage("cant give perk to a non-player");
+                return false;
+            }
+        } return false;
+    }
+}
