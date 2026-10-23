@@ -8,7 +8,6 @@ import net.ess3.api.MaxMoneyException;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -174,9 +173,7 @@ public class KillUtil {
         if (kills >= 10) {
             AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 20);
             Economy.add(player.getUniqueId(), BigDecimal.valueOf(80));
-            points += 20;for (Player p : Bukkit.getOnlinePlayers()) {
-
-            }
+            points += 20;
             money += 80;
         }
 

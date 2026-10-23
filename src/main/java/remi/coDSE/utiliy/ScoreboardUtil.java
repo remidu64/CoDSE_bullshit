@@ -5,7 +5,6 @@ import com.earth2me.essentials.api.UserDoesNotExistException;
 import fr.mrmicky.fastboard.adventure.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
