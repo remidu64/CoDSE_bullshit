@@ -39,7 +39,7 @@ public final class CoDSE extends JavaPlugin {
                     throw new RuntimeException(e);
                 }
             }
-        }, 0, 20);
+        }, 0, 10);
 
         logger.info("plugin is on :3");
 
@@ -63,6 +63,7 @@ public final class CoDSE extends JavaPlugin {
         Objects.requireNonNull(getCommand("setkillstreak")).setExecutor(new SetKillstreakCommand());
         Objects.requireNonNull(getCommand("deadshotdaiquiri")).setExecutor(new DeadshotDaiquiriCommand());
         Objects.requireNonNull(getCommand("ddtrigger")).setExecutor(new DeadshotDaiquiriTriggerCommand());
+        Objects.requireNonNull(getCommand("stoppingrounds")).setExecutor(new StoppingRoundsCommand());
         logger.info("commands loaded");
 
     }

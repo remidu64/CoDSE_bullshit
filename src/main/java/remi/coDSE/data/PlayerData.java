@@ -40,7 +40,9 @@ public class PlayerData {
 
     public void setStopping_rounds(int stopping_rounds) {this.stopping_rounds = stopping_rounds;}
 
-    public  void decrementStopping_Rounds() {this.stopping_rounds--;}
+    public void addStopping_rounds(int stopping_rounds) {this.stopping_rounds += stopping_rounds;}
+
+    public void decrementStopping_Rounds() {this.stopping_rounds--;}
 
     public boolean didDDTrigger() {return DDTrigger;}
 

@@ -5,10 +5,12 @@ import com.earth2me.essentials.api.NoLoanPermittedException;
 import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.deecaad.weaponmechanics.WeaponMechanicsAPI;
 import net.ess3.api.MaxMoneyException;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,9 +24,12 @@ import org.bukkit.inventory.meta.Damageable;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.Random;
 
 public class KillUtil {
+    static Audience audience;
+    static final Title.Times times = Title.Times.times(Duration.ofMillis(250), Duration.ofMillis(2500), Duration.ofMillis(250));
 
     public static void HandlePointsAndShit(Player player, int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
 
@@ -169,7 +174,9 @@ public class KillUtil {
         if (kills >= 10) {
             AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 20);
             Economy.add(player.getUniqueId(), BigDecimal.valueOf(80));
-            points += 20;
+            points += 20;for (Player p : Bukkit.getOnlinePlayers()) {
+
+            }
             money += 80;
         }
 
@@ -207,9 +214,8 @@ public class KillUtil {
         // 1/69420 chance of getting the fish
         if (random.nextInt(69420) == 0) {
             WeaponMechanicsAPI.giveWeapon("ADMINjustno", player);
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(Component.text(player + " JUST OBTAINED THE FISH, RUN WHILST YOU STILL CAN", TextColor.fromHexString("#FF0000")).decoration(TextDecoration.BOLD, true));
-            }
+            Title title = Title.title(MiniMessage.miniMessage().deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), MiniMessage.miniMessage().deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
+            audience.showTitle(title);
         }
     }
 

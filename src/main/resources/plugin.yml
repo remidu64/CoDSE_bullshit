@@ -53,3 +53,7 @@ commands:
   ddtrigger:
     description: "deadshot daiquiri trigger command (shouldn't be used in normal gameplay)"
     permission: codse.gameplay.ddt
+
+  stoppingrounds:
+    description: "stopping rounds command (shouldn't be used in normal gameplay)"
+    permission: codse.gameplay.stoppingrounds
