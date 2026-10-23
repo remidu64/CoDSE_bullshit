@@ -39,7 +39,7 @@ public final class CoDSE extends JavaPlugin {
                     throw new RuntimeException(e);
                 }
             }
-        }, 0, 10);
+        }, 0, 20);
 
         logger.info("plugin is on :3");
 
