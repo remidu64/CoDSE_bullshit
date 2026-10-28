@@ -8,30 +8,31 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
 public class DeadshotDaiquiriCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
+        if (!command.getName().equalsIgnoreCase("deadshotdaiquiri")) {
+            return false;
+        }
 
-        if (command.getName().equalsIgnoreCase("deadshotdaiquiri")) {
-            if (sender instanceof Player player) {
-                PlayerData data = PlayerUtil.getPlayerData(player);
-                data.setPerk(5);
+        if (!(sender instanceof Player player)) {
+            GeneralUtil.messageShortcut(sender,"<color:#FF0000>ERROR: Command sender is not a player</color>");
+            return false;
+        }
 
-                PlayerUtil.setPlayerData(player, data);
+        PlayerData data = PlayerUtil.getPlayerData(player);
+        data.setPerk(5);
 
-                PlayerUtil.ApplyPerk(5, player);
+        PlayerUtil.setPlayerData(player, data);
 
-                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 5);
-                CoDSE.getInstance().saveConfig();
-                return true;
+        PlayerUtil.ApplyPerk(5, player);
 
-            } else {
-                sender.sendMessage("cant give perk to a non-player");
-                return false;
-            }
-        } return false;
+        CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 5);
+        CoDSE.getInstance().saveConfig();
+        return true;
     }
 }

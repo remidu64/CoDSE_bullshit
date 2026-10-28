@@ -5,32 +5,36 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
 public class QuickReviveCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
 
-        if (command.getName().equalsIgnoreCase("quickrevive")) {
-            if (sender instanceof Player player) {
-                PlayerData data = PlayerUtil.getPlayerData(player);
+        if (!command.getName().equalsIgnoreCase("quickrevive")) {
+            return false;
+        }
 
-                data.setPerk(2);
-                PlayerUtil.setPlayerData(player, data);
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(GeneralUtil.deserialize("<color:#FF0000>ERROR: Command sender is not a player</color>"));
+            return false;
+        }
 
-                PlayerUtil.ApplyPerk(2, player);
+        PlayerData data = PlayerUtil.getPlayerData(player);
 
-                CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 2);
-                CoDSE.getInstance().saveConfig();
-                return true;
+        data.setPerk(2);
+        PlayerUtil.setPlayerData(player, data);
 
-            } else {
-                sender.sendMessage("cant give perk to a non-player");
-                return false;
-            }
-        } return false;
+        PlayerUtil.ApplyPerk(2, player);
+
+        CoDSE.getInstance().getConfig().set(player.getUniqueId() + ".perk", 2);
+        CoDSE.getInstance().saveConfig();
+        return true;
+
     }
 }

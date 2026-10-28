@@ -3,54 +3,57 @@ package remi.coDSE.commands;
 import com.earth2me.essentials.api.NoLoanPermittedException;
 import com.earth2me.essentials.api.UserDoesNotExistException;
 import net.ess3.api.MaxMoneyException;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.KillUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
 public class SetKillstreakCommand implements CommandExecutor {
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("setkillstreak")) {
-            if (args.length == 2) {
-                Player player = Bukkit.getPlayer(args[0]);
-
-                if (player == null) {
-                    sender.sendMessage(Component.text("Error: Player " + args[0] + " doesn't exist", TextColor.color(255, 0, 0)));
-                    return false;
-                }
-
-                int kill;
-                try {
-                    kill = Integer.parseInt(args[1]);
-                } catch (NumberFormatException e) {
-                    sender.sendMessage(Component.text("Error: " + args[1] +  " is not a positive integer", TextColor.color(255, 0, 0)));
-                    return false;
-                }
-
-                PlayerData data = PlayerUtil.getPlayerData(player);
-                data.setKills(kill);
-                PlayerUtil.setPlayerData(player, data);
-                try {
-                    KillUtil.HandlePointsAndShit(player, kill);
-                } catch (MaxMoneyException | NoLoanPermittedException | UserDoesNotExistException e) {
-                    throw new RuntimeException(e);
-                }
-                sender.sendMessage(Component.text("Successfully set " + args[0] + "'s killstreak to " + args[1], TextColor.color(0, 255, 0)));
-
-                return true;
-            } else {
-                sender.sendMessage(Component.text("Error: Incorrect amount of arguments provided (2 expected, " + args.length + " provided)", TextColor.color(255, 0, 0)));
-                return false;
-            }
-
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
+        if (!command.getName().equalsIgnoreCase("setkillstreak")) {
+            return false;
         }
-        return false;
+
+        if (args.length == 0) {
+            GeneralUtil.messageShortcut(sender, "Usage: /setkillstreak <player> <amount>");
+            return false;
+        }
+
+        if (args.length != 2) {
+            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (2 expected, %s found)</color>".formatted(args.length));
+            return false;
+        }
+
+        Player player = Bukkit.getPlayer(args[0]);
+        if (player == null) {
+            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
+            return false;
+        }
+
+        if (GeneralUtil.isNotNumeric(args[1])) {
+            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: 2nd argument '%s' isn't an integer</color>".formatted(args[1]));
+            return false;
+        }
+
+        int kill = Integer.parseInt(args[1]);
+
+        PlayerData data = PlayerUtil.getPlayerData(player);
+        data.setKills(kill);
+        PlayerUtil.setPlayerData(player, data);
+        try {
+            KillUtil.HandlePointsAndShit(player, kill);
+        } catch (MaxMoneyException | NoLoanPermittedException | UserDoesNotExistException e) {
+            throw new RuntimeException(e);
+        }
+
+        GeneralUtil.messageShortcut(sender, "<color:#00FF00>Set %s's killstreak to %s</color>".formatted(args[0], kill));
+        return true;
     }
 }

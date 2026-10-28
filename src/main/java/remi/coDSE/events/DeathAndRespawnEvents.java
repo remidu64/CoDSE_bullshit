@@ -47,12 +47,14 @@ public class DeathAndRespawnEvents implements Listener {
         Player victim = event.getEntity();
         victim.stopSound("meme.encounter");
         PlayerData victim_data = PlayerUtil.getPlayerData(victim);
+
         if(random.nextInt(5) == 0 && !victim_data.isPhase2() && victim_data.getKills() >= 10) {
             Location location = victim.getLocation();
             victim_data.setPhase2(true);
             victim_data.setLocation(location);
             return;
         }
+
         victim_data.setPhase2(false);
         Player killer = victim.getKiller();
         if (killer != null && killer != victim) {
@@ -62,6 +64,7 @@ public class DeathAndRespawnEvents implements Listener {
             PlayerUtil.setPlayerData(killer, killer_data);
             KillUtil.HandlePointsAndShit(killer, killer_data.getKills());
         }
+
         victim_data.setKills(0);
         PlayerUtil.setPlayerData(victim, victim_data);
     }
