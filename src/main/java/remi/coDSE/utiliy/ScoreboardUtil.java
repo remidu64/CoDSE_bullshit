@@ -5,7 +5,6 @@ import com.earth2me.essentials.api.UserDoesNotExistException;
 import fr.mrmicky.fastboard.adventure.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
 
@@ -35,14 +34,14 @@ public class ScoreboardUtil {
     public static void UpdateScoreboard( FastBoard scoreboard) throws UserDoesNotExistException {
         scoreboard.updateLines(
                 emptyLine,
-                MiniMessage.miniMessage().deserialize(String.format("<gradient:#00ff00:#118c4f>Balance: %s P</gradient>", Economy.getMoneyExact(scoreboard.getPlayer().getUniqueId()))),
+                GeneralUtil.deserialize(String.format("<gradient:#00ff00:#118c4f>Balance: %s P</gradient>", Economy.getMoneyExact(scoreboard.getPlayer().getUniqueId()))),
                 emptyLine,
-                MiniMessage.miniMessage().deserialize("<color:#%s>%s</color>".formatted(PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league_color%").replace("§", "").replace("&", "").replace("x", ""), PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league%"))),
-                MiniMessage.miniMessage().deserialize("<color:#%s>%s</color>".formatted(PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league_color%").replace("§", "").replace("&", "").replace("x", ""), PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_progress_stripped%"))),
+                GeneralUtil.deserialize("<color:#%s>%s</color>".formatted(PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league_color%").replace("§", "").replace("&", "").replace("x", ""), PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league%"))),
+                GeneralUtil.deserialize("<color:#%s>%s</color>".formatted(PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_league_color%").replace("§", "").replace("&", "").replace("x", ""), PlaceholderAPI.setPlaceholders(scoreboard.getPlayer(), "%alonsoleagues_progress_stripped%"))),
                 emptyLine,
-                MiniMessage.miniMessage().deserialize(String.format("<gradient:#ff5555:#aa0000>Killstreak: %s</gradient>", PlayerUtil.getPlayerData(scoreboard.getPlayer()).getKills())),
+                GeneralUtil.deserialize(String.format("<gradient:#ff5555:#aa0000>Killstreak: %s</gradient>", PlayerUtil.getPlayerData(scoreboard.getPlayer()).getKills())),
                 emptyLine,
-                MiniMessage.miniMessage().deserialize("<gradient:#C9C9C9:#4A4A4A>S-Rounds: %s</gradient>".formatted(PlayerUtil.getPlayerData(scoreboard.getPlayer()).getStopping_rounds()))
+                GeneralUtil.deserialize("<gradient:#C9C9C9:#4A4A4A>S-Rounds: %s</gradient>".formatted(PlayerUtil.getPlayerData(scoreboard.getPlayer()).getStopping_rounds()))
         );
     }
 }

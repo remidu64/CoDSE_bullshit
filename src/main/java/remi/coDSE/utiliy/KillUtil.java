@@ -6,9 +6,6 @@ import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.deecaad.weaponmechanics.WeaponMechanicsAPI;
 import net.ess3.api.MaxMoneyException;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -51,7 +48,7 @@ public class KillUtil {
 
     static {
         Damageable meta = (Damageable) reactive_armor.getItemMeta();
-        meta.displayName(Component.text("Reactive armor", TextColor.fromHexString("#ff55ff")));
+        meta.displayName(GeneralUtil.deserialize("<color:#FF55FF>Reactive Armor</color>"));
         meta.addEnchant(Enchantment.THORNS, 3, false);
         meta.addEnchant(Enchantment.UNBREAKING, 3, false);
         meta.addAttributeModifier(Attribute.ARMOR, new AttributeModifier(new NamespacedKey("remi", "armor"), 10, AttributeModifier.Operation.ADD_NUMBER));
@@ -60,22 +57,22 @@ public class KillUtil {
         reactive_armor.setItemMeta(meta);
 
         meta = (Damageable) t1helmet.getItemMeta();
-        meta.displayName(Component.text("Tier I Helmet"));
+        meta.displayName(GeneralUtil.deserialize("<color:#FFFFFF>T1 Helmet</color>"));
         meta.setMaxDamage(50);
         t1helmet.setItemMeta(meta);
 
         meta = (Damageable) t1chestplate.getItemMeta();
-        meta.displayName(Component.text("Tier I Chestplate"));
+        meta.displayName(GeneralUtil.deserialize("<color:#FFFFFF>T1 Chestplate</color>"));
         meta.setMaxDamage(80);
         t1chestplate.setItemMeta(meta);
 
         meta = (Damageable) t2helmet.getItemMeta();
-        meta.displayName(Component.text("Tier II Helmet"));
+        meta.displayName(GeneralUtil.deserialize("<color:#00FFFF>T2 Helmet</color>"));
         meta.setMaxDamage(120);
         t2helmet.setItemMeta(meta);
 
         meta = (Damageable) t2chestplate.getItemMeta();
-        meta.displayName(Component.text("Tier II Chestplate"));
+        meta.displayName(GeneralUtil.deserialize("<color:#00FFFF>T2 Chestplate</color>"));
         meta.setMaxDamage(175);
         t2chestplate.setItemMeta(meta);
     }
@@ -92,22 +89,22 @@ public class KillUtil {
                 switch (random.nextInt(4)) {
                     case 0:
                         inventory.addItem(t1helmet);
-                        player.sendMessage(Component.text().content("+T1 Helmet").color(TextColor.fromHexString("#ffffff")).build());
+                        GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+T1 Helmet</color>");
                         break;
 
                     case 1:
                         inventory.addItem(t1chestplate);
-                        player.sendMessage(Component.text().content("+T1 Chestplate").color(TextColor.fromHexString("#ffffff")).build());
+                        GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+T1 Chestplate</color>");
                         break;
 
                     case 2:
                         inventory.addItem(t2helmet);
-                        player.sendMessage(Component.text().content("+T2 Helmet").color(TextColor.fromHexString("#00ffff")).build());
+                        GeneralUtil.messageShortcut(player, "<color:#00FFFF>+T2 Helmet</color>");
                         break;
 
                     case 3:
                         inventory.addItem(t2chestplate);
-                        player.sendMessage(Component.text().content("+T2 Chestplate").color(TextColor.fromHexString("#00ffff")).build());
+                        GeneralUtil.messageShortcut(player, "<color:#00FFFF>+T2 Chestplate</color>");
                         break;
 
                     default:
@@ -116,7 +113,7 @@ public class KillUtil {
                 }
             } else {
                 inventory.addItem(reactive_armor);
-                player.sendMessage(Component.text().content("+Reactive Armor").color(TextColor.fromHexString("#ff55ff")).build());
+                GeneralUtil.messageShortcut(player, "<color:#FF55FF>+Reactive Armor</color>");
             }
         }
     }
@@ -126,33 +123,33 @@ public class KillUtil {
         switch (random.nextInt(7)) {
             case 0 -> {
                 WeaponMechanicsAPI.giveWeapon("STIM", player);
-                player.sendMessage(Component.text().content("+STIM").color(TextColor.fromHexString("#009aff")).build());
+                GeneralUtil.messageShortcut(player, "<color:#009AFF>+STIM</color>");
             }
             case 1 -> {
                 WeaponMechanicsAPI.giveWeapon("LightArmorPlate", player);
-                player.sendMessage(Component.text().content("+Light armor Plate").color(TextColor.fromHexString("#00ff00")).build());
+                GeneralUtil.messageShortcut(player,"<color:#00FF00>+Light armor Plate</color>");
             }
             case 2 -> {
                 WeaponMechanicsAPI.giveWeapon("MediumArmorPlate", player);
-                player.sendMessage(Component.text().content("+Medium Armor Plate").color(TextColor.fromHexString("#ffff00")).build());
+                GeneralUtil.messageShortcut(player, "<color#FFFF00>+Medium Armor Plate</color>");
             }
             case 3 -> {
                 WeaponMechanicsAPI.giveWeapon("HeavyArmorPlate", player);
-                player.sendMessage(Component.text().content("+Heavy Armor Plate").color(TextColor.fromHexString("#ff0000")).build());
+                GeneralUtil.messageShortcut(player,"<color:#FF0000>+Heavy Armor Plate</color>");
             }
             case 4 -> {
                 WeaponMechanicsAPI.giveWeapon("GRENADE", player);
-                player.sendMessage(Component.text().content("+Grenade").color(TextColor.fromHexString("#308D30")).build());
+                GeneralUtil.messageShortcut(player,"<color:#308D30>+Grenade");
             }
             case 5 -> {
                 WeaponMechanicsAPI.giveWeapon("SEMTEX", player);
-                player.sendMessage(Component.text().content("+Semtex").color(TextColor.fromHexString("#ffffff")).build());
+                GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+Semtex</color>");
             }
             case 6 -> {
                 WeaponMechanicsAPI.giveWeapon("IMPACTGRENADE", player);
-                player.sendMessage(Component.text().content("+Impact ").color(TextColor.fromHexString("#7A7A7A")).append(Component.text("Grenade", TextColor.fromHexString("#308D30"))).build());
+               GeneralUtil.messageShortcut(player, "<color:#7A7A7A>+Impact</color> <color#308D30>Grenade</color>");
             }
-            default -> player.sendMessage(Component.text("+ nothing lmao"));
+            default -> GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+ nothing lmao</color>");
         }
     }
 
@@ -204,14 +201,14 @@ public class KillUtil {
             points += 150;
             money += 600;
         }
-        player.sendMessage(Component.text().content(String.format("+%s points / +%s hungarian pengő", points, money)).color(TextColor.fromHexString("#ffaa00")).build());
+        GeneralUtil.messageShortcut(player,"<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
     }
 
     private static void Fish(Player player) {
         // 1/69420 chance of getting the fish
         if (random.nextInt(69420) == 0) {
             WeaponMechanicsAPI.giveWeapon("ADMINjustno", player);
-            Title title = Title.title(MiniMessage.miniMessage().deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), MiniMessage.miniMessage().deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
+            Title title = Title.title(GeneralUtil.deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), GeneralUtil.deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
             audience.showTitle(title);
         }
     }
@@ -221,20 +218,20 @@ public class KillUtil {
             if (kills % 5 == 0) {
                 player.playSound(player.getLocation(), "minecraft:misc.tf_domination", 10, 1);
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                   p.sendMessage(MiniMessage.miniMessage().deserialize(String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills)));
+                   GeneralUtil.messageShortcut(p, String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills));
                 }
             }
             if (kills % 7 == 0) {
                 WeaponMechanicsAPI.giveWeapon("Panzerfaust30", player);
-                player.sendMessage(Component.text("+Panzerfaust 30 ", TextColor.fromHexString("#E4C04B")));
+                GeneralUtil.messageShortcut(player,"<color:#E4C04B>+Panzerfaust 30 </color>");
             }
             if (kills % 15 == 0) {
                 WeaponMechanicsAPI.giveWeapon("MGB",  player);
-                player.sendMessage(Component.text("+MGB ", TextColor.fromHexString("#383327")));
+                GeneralUtil.messageShortcut(player,"<color:#383327>+MGB </color>");
             }
             if (kills % 30 == 0) {
                 WeaponMechanicsAPI.giveWeapon("FULLAUTOMGBLAUNCHER",  player);
-                player.sendMessage(Component.text("+Full Auto MGB Launcher ", TextColor.fromHexString("#ff0000")));
+                GeneralUtil.messageShortcut(player, "<color:#FF0000>+Full Auto MGB Launcher </color>");
             }
         }
     }

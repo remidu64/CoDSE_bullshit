@@ -1,9 +1,6 @@
 package remi.coDSE.events;
 
 import fr.mrmicky.fastboard.adventure.FastBoard;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import remi.coDSE.core.CoDSE;
 import remi.coDSE.data.PlayerData;
+import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 import remi.coDSE.utiliy.ScoreboardUtil;
 
@@ -39,10 +37,10 @@ public class JoinAndLeaveEvents implements Listener {
         PlayerUtil.setPlayerData(player, data);
 
         FastBoard scoreboard = new FastBoard(player);
-        scoreboard.updateTitle(Component.text().content("CODSE").color(TextColor.fromHexString("#ffff00")).decorate(TextDecoration.BOLD).build());
+        scoreboard.updateTitle(GeneralUtil.deserialize("<color:#FFFF00><b>CODSE</b></color>"));
         ScoreboardUtil.SetScoreboard(player, scoreboard);
 
-        event.joinMessage(Component.text(player.getName() + " joined the hellhole", TextColor.color(255, 255, 0)));
+        event.joinMessage(GeneralUtil.deserialize("<color:#FFFF00>%s has joined the hellhole</color>".formatted(player.displayName())));
 
     }
 
@@ -50,6 +48,7 @@ public class JoinAndLeaveEvents implements Listener {
     public void onLeave(PlayerQuitEvent event) {
         //clean up shit when the player leaves
         Player player = event.getPlayer();
+        event.quitMessage(GeneralUtil.deserialize("<color:#FFFF00>%s is gonna touch grass</color>".formatted(player.displayName())));
 
         PlayerUtil.setPlayerData(player, null);
         ScoreboardUtil.SetScoreboard(player, null);

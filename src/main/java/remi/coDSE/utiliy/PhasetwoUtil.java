@@ -3,7 +3,6 @@ package remi.coDSE.utiliy;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -29,8 +28,8 @@ public class PhasetwoUtil {
         player.addPotionEffects(List.of(blindness_48s, stop_48s, immunity_48s));
 
         final Title.Times times = Title.Times.times(Duration.ofMillis(500), Duration.ofMillis(2000), Duration.ofMillis(350));
-        final Title remember_son = Title.title(Component.text("Remember son", NamedTextColor.WHITE), Component.empty(), times);
-        final Title dying_is_gay = Title.title(Component.text("Dying is gay", NamedTextColor.WHITE), Component.empty(), times);
+        final Title remember_son = Title.title(GeneralUtil.deserialize("<color:#FFFFFF>Remember son</color>"), Component.empty(), times);
+        final Title dying_is_gay = Title.title(GeneralUtil.deserialize("<color:#FFFFFF>Dying is gay</color>"), Component.empty(), times);
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> {
             player.playSound(player.getLocation(), "meme.encounter", 1.0f, 1.0f);

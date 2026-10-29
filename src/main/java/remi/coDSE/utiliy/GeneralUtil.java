@@ -20,7 +20,7 @@ public class GeneralUtil {
         return MiniMessage.miniMessage().deserialize(message);
     }
 
-    public static void messageShortcut(CommandSender sender, String message) {
-        sender.sendMessage(deserialize(message));
+    public static void messageShortcut(CommandSender recipient, String message) {
+        recipient.sendMessage(deserialize(message));
     }
 }
