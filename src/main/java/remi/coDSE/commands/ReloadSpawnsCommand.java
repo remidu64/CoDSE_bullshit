@@ -17,7 +17,7 @@ public class ReloadSpawnsCommand implements CommandExecutor {
         }
 
         SpawnUtil.reloadSpawnLocations();
-        GeneralUtil.messageShortcut(sender, "<color:#FF0000>Reloaded spawn locations</color>");
+        GeneralUtil.sendMessage(sender, "<color:#FF0000>Reloaded spawn locations</color>");
 
         return true;
 

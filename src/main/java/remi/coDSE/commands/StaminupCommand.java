@@ -22,7 +22,7 @@ public class StaminupCommand implements CommandExecutor {
 
 
         if (!(sender instanceof Player player)) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Command sender isn't a player</color>");
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Command sender isn't a player</color>");
             return false;
         }
 

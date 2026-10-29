@@ -1,9 +1,9 @@
 package remi.coDSE.utiliy;
 
 
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.command.CommandSender;
 
 public class GeneralUtil {
     public static boolean isNotNumeric(String str) {
@@ -20,7 +20,5 @@ public class GeneralUtil {
         return MiniMessage.miniMessage().deserialize(message);
     }
 
-    public static void messageShortcut(CommandSender recipient, String message) {
-        recipient.sendMessage(deserialize(message));
-    }
+    public static void sendMessage(Audience recipient, String message) { recipient.sendMessage(deserialize(message)); }
 }

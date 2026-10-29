@@ -22,23 +22,23 @@ public class SetKillstreakCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            GeneralUtil.messageShortcut(sender, "Usage: /setkillstreak <player> <amount>");
+            GeneralUtil.sendMessage(sender, "Usage: /setkillstreak <player> <amount>");
             return false;
         }
 
         if (args.length != 2) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (2 expected, %s found)</color>".formatted(args.length));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (2 expected, %s found)</color>".formatted(args.length));
             return false;
         }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
             return false;
         }
 
         if (GeneralUtil.isNotNumeric(args[1])) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: 2nd argument '%s' isn't an integer</color>".formatted(args[1]));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: 2nd argument '%s' isn't an integer</color>".formatted(args[1]));
             return false;
         }
 
@@ -53,7 +53,7 @@ public class SetKillstreakCommand implements CommandExecutor {
             throw new RuntimeException(e);
         }
 
-        GeneralUtil.messageShortcut(sender, "<color:#00FF00>Set %s's killstreak to %s</color>".formatted(args[0], kill));
+        GeneralUtil.sendMessage(sender, "<color:#00FF00>Set %s's killstreak to %s</color>".formatted(args[0], kill));
         return true;
     }
 }

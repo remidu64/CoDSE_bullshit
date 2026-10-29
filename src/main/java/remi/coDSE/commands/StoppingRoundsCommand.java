@@ -19,24 +19,24 @@ public class StoppingRoundsCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            sender.sendMessage(MiniMessage.miniMessage().deserialize("<color:#FFFF00>Usage: /stoppingrounds <player> <set/add> <integer></color>"));
+            GeneralUtil.sendMessage(sender, "<color:#FFFF00>Usage: /stoppingrounds <player> <set/add> <integer></color>");
             return false;
         }
 
         if (args.length != 3) {
-            sender.sendMessage(MiniMessage.miniMessage().deserialize("<color:#FF0000>ERROR: Incorrect amount of argument (3 expected, %s provided)</color>".formatted(args.length)));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Incorrect amount of argument (3 expected, %s provided)</color>".formatted(args.length));
             return false;
         }
 
-            Player player = Bukkit.getPlayer(args[0]);
+        Player player = Bukkit.getPlayer(args[0]);
 
         if(player == null) {
-            sender.sendMessage(MiniMessage.miniMessage().deserialize(String.format("<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]))));
+            GeneralUtil.sendMessage(sender, String.format("<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0])));
             return false;
            }
 
         if (GeneralUtil.isNotNumeric(args[2])) {
-            sender.sendMessage(MiniMessage.miniMessage().deserialize("<color:#FF0000>ERROR: 3rd argument '%s' isn't an integer</color>".formatted(args[2])));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: 3rd argument '%s' isn't an integer</color>".formatted(args[2]));
             return false;
         }
 
@@ -54,7 +54,7 @@ public class StoppingRoundsCommand implements CommandExecutor {
             }
 
             default -> {
-                sender.sendMessage(MiniMessage.miniMessage().deserialize("<color:#FF0000>ERROR: Expected argument 'add' or 'set', got '%s' insteac</color>".formatted(args[1])));
+                GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Expected argument 'add' or 'set', got '%s' instead</color>".formatted(args[1]));
                 return false;
             }
 

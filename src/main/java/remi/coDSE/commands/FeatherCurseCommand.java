@@ -21,7 +21,7 @@ public class FeatherCurseCommand implements CommandExecutor {
         }
 
         if (!(sender instanceof Player player)) {
-            GeneralUtil.messageShortcut(sender,"<color:#FF0000>ERROR: Command sender is not a player</color>");
+            GeneralUtil.sendMessage(sender,"<color:#FF0000>ERROR: Command sender is not a player</color>");
             return false;
         }
 

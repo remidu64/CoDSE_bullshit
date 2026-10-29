@@ -89,22 +89,22 @@ public class KillUtil {
                 switch (random.nextInt(4)) {
                     case 0:
                         inventory.addItem(t1helmet);
-                        GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+T1 Helmet</color>");
+                        GeneralUtil.sendMessage(player, "<color:#FFFFFF>+T1 Helmet</color>");
                         break;
 
                     case 1:
                         inventory.addItem(t1chestplate);
-                        GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+T1 Chestplate</color>");
+                        GeneralUtil.sendMessage(player, "<color:#FFFFFF>+T1 Chestplate</color>");
                         break;
 
                     case 2:
                         inventory.addItem(t2helmet);
-                        GeneralUtil.messageShortcut(player, "<color:#00FFFF>+T2 Helmet</color>");
+                        GeneralUtil.sendMessage(player, "<color:#00FFFF>+T2 Helmet</color>");
                         break;
 
                     case 3:
                         inventory.addItem(t2chestplate);
-                        GeneralUtil.messageShortcut(player, "<color:#00FFFF>+T2 Chestplate</color>");
+                        GeneralUtil.sendMessage(player, "<color:#00FFFF>+T2 Chestplate</color>");
                         break;
 
                     default:
@@ -113,7 +113,7 @@ public class KillUtil {
                 }
             } else {
                 inventory.addItem(reactive_armor);
-                GeneralUtil.messageShortcut(player, "<color:#FF55FF>+Reactive Armor</color>");
+                GeneralUtil.sendMessage(player, "<color:#FF55FF>+Reactive Armor</color>");
             }
         }
     }
@@ -123,33 +123,33 @@ public class KillUtil {
         switch (random.nextInt(7)) {
             case 0 -> {
                 WeaponMechanicsAPI.giveWeapon("STIM", player);
-                GeneralUtil.messageShortcut(player, "<color:#009AFF>+STIM</color>");
+                GeneralUtil.sendMessage(player, "<color:#009AFF>+STIM</color>");
             }
             case 1 -> {
                 WeaponMechanicsAPI.giveWeapon("LightArmorPlate", player);
-                GeneralUtil.messageShortcut(player,"<color:#00FF00>+Light armor Plate</color>");
+                GeneralUtil.sendMessage(player,"<color:#00FF00>+Light armor Plate</color>");
             }
             case 2 -> {
                 WeaponMechanicsAPI.giveWeapon("MediumArmorPlate", player);
-                GeneralUtil.messageShortcut(player, "<color#FFFF00>+Medium Armor Plate</color>");
+                GeneralUtil.sendMessage(player, "<color#FFFF00>+Medium Armor Plate</color>");
             }
             case 3 -> {
                 WeaponMechanicsAPI.giveWeapon("HeavyArmorPlate", player);
-                GeneralUtil.messageShortcut(player,"<color:#FF0000>+Heavy Armor Plate</color>");
+                GeneralUtil.sendMessage(player,"<color:#FF0000>+Heavy Armor Plate</color>");
             }
             case 4 -> {
                 WeaponMechanicsAPI.giveWeapon("GRENADE", player);
-                GeneralUtil.messageShortcut(player,"<color:#308D30>+Grenade");
+                GeneralUtil.sendMessage(player,"<color:#308D30>+Grenade");
             }
             case 5 -> {
                 WeaponMechanicsAPI.giveWeapon("SEMTEX", player);
-                GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+Semtex</color>");
+                GeneralUtil.sendMessage(player, "<color:#FFFFFF>+Semtex</color>");
             }
             case 6 -> {
                 WeaponMechanicsAPI.giveWeapon("IMPACTGRENADE", player);
-               GeneralUtil.messageShortcut(player, "<color:#7A7A7A>+Impact</color> <color#308D30>Grenade</color>");
+               GeneralUtil.sendMessage(player, "<color:#7A7A7A>+Impact</color> <color#308D30>Grenade</color>");
             }
-            default -> GeneralUtil.messageShortcut(player, "<color:#FFFFFF>+ nothing lmao</color>");
+            default -> GeneralUtil.sendMessage(player, "<color:#FFFFFF>+ nothing lmao</color>");
         }
     }
 
@@ -201,7 +201,7 @@ public class KillUtil {
             points += 150;
             money += 600;
         }
-        GeneralUtil.messageShortcut(player,"<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
+        GeneralUtil.sendMessage(player,"<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
     }
 
     private static void Fish(Player player) {
@@ -218,20 +218,20 @@ public class KillUtil {
             if (kills % 5 == 0) {
                 player.playSound(player.getLocation(), "minecraft:misc.tf_domination", 10, 1);
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                   GeneralUtil.messageShortcut(p, String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills));
+                   GeneralUtil.sendMessage(p, String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills));
                 }
             }
             if (kills % 7 == 0) {
                 WeaponMechanicsAPI.giveWeapon("Panzerfaust30", player);
-                GeneralUtil.messageShortcut(player,"<color:#E4C04B>+Panzerfaust 30 </color>");
+                GeneralUtil.sendMessage(player,"<color:#E4C04B>+Panzerfaust 30 </color>");
             }
             if (kills % 15 == 0) {
                 WeaponMechanicsAPI.giveWeapon("MGB",  player);
-                GeneralUtil.messageShortcut(player,"<color:#383327>+MGB </color>");
+                GeneralUtil.sendMessage(player,"<color:#383327>+MGB </color>");
             }
             if (kills % 30 == 0) {
                 WeaponMechanicsAPI.giveWeapon("FULLAUTOMGBLAUNCHER",  player);
-                GeneralUtil.messageShortcut(player, "<color:#FF0000>+Full Auto MGB Launcher </color>");
+                GeneralUtil.sendMessage(player, "<color:#FF0000>+Full Auto MGB Launcher </color>");
             }
         }
     }

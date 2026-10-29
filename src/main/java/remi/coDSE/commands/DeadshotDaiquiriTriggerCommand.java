@@ -18,13 +18,13 @@ public class DeadshotDaiquiriTriggerCommand implements CommandExecutor {
         }
 
         if (args.length != 1) {
-            GeneralUtil.messageShortcut(sender, "Error: Incorrect amount of arguments provided (1 expected, " + args.length + " provided)");
+            GeneralUtil.sendMessage(sender, "Error: Incorrect amount of arguments provided (1 expected, " + args.length + " provided)");
             return false;
         }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
             return false;
         }
 

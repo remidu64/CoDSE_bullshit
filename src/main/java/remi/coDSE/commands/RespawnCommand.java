@@ -19,23 +19,23 @@ public class RespawnCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            GeneralUtil.messageShortcut(sender, "<color:#FFFF00>Usage: /respawn <player></color>");
+            GeneralUtil.sendMessage(sender, "<color:#FFFF00>Usage: /respawn <player></color>");
             return false;
         }
 
         if (args.length != 1) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s found)</color>".formatted(args.length));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s found)</color>".formatted(args.length));
             return false;
         }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
             return false;
         }
 
         SpawnUtil.Respawn(player);
-        GeneralUtil.messageShortcut(sender, "<color:#00FF00>Respawned %s </color>".formatted(args[0]));
+        GeneralUtil.sendMessage(sender, "<color:#00FF00>Respawned %s </color>".formatted(args[0]));
         return true;
     }
 }

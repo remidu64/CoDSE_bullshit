@@ -19,13 +19,13 @@ public class MedicCommand implements CommandExecutor {
         }
 
         if (args.length != 1) {
-            GeneralUtil.messageShortcut(sender,"<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s provided)</color>".formatted(args.length));
+            GeneralUtil.sendMessage(sender,"<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s provided)</color>".formatted(args.length));
             return false;
         }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null) {
-            GeneralUtil.messageShortcut(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
+            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
             return false;
         }
 
