@@ -5,7 +5,6 @@ import com.earth2me.essentials.api.NoLoanPermittedException;
 import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.deecaad.weaponmechanics.WeaponMechanicsAPI;
 import net.ess3.api.MaxMoneyException;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,13 +17,13 @@ import com.alonsoaliaga.alonsoleagues.api.AlonsoLeaguesAPI;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.Damageable;
 import org.jetbrains.annotations.NotNull;
+import remi.coDSE.core.CoDSE;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Random;
 
 public class KillUtil {
-    static Audience audience;
     static final Title.Times times = Title.Times.times(Duration.ofMillis(250), Duration.ofMillis(2500), Duration.ofMillis(250));
 
     public static void HandlePointsAndShit(Player player, int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
@@ -209,7 +208,7 @@ public class KillUtil {
         if (random.nextInt(69420) == 0) {
             WeaponMechanicsAPI.giveWeapon("ADMINjustno", player);
             Title title = Title.title(GeneralUtil.deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), GeneralUtil.deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
-            audience.showTitle(title);
+            CoDSE.server.showTitle(title);
         }
     }
 

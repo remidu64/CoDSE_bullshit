@@ -2,6 +2,8 @@ package remi.coDSE.core;
 
 import com.earth2me.essentials.api.UserDoesNotExistException;
 import fr.mrmicky.fastboard.adventure.FastBoard;
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 import remi.coDSE.commands.*;
 import remi.coDSE.events.DamageEvents;
@@ -23,6 +25,7 @@ public final class CoDSE extends JavaPlugin {
     public static CoDSE getInstance() {
         return instance;
     }
+    public static Server server = Bukkit.getServer();
 
     @Override
     public void onEnable() {
