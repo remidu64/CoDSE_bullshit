@@ -23,7 +23,7 @@ public class DamageEvents implements Listener {
                 event.setCancelled(true);
             }
 
-            PlayerData data = PlayerUtil.getPlayerData(playerDamager);
+            final PlayerData data = PlayerUtil.getPlayerData(playerDamager);
             if (data.getStopping_rounds() > 0) {
                 event.setDamage(event.getDamage() * 1.2);
                 data.decrementStopping_Rounds();
@@ -37,9 +37,9 @@ public class DamageEvents implements Listener {
             }
 
         }
-        if (event.getEntity() instanceof Player player) {
+        if (event.getEntity() instanceof final Player player) {
 
-            double current_absorption = player.getAbsorptionAmount();
+            final double current_absorption = player.getAbsorptionAmount();
 
             if (current_absorption - event.getDamage() < 0.1 && current_absorption > 0 && event.getDamage() > 0.05) {
                 player.playSound(player.getLocation(), "minecraft:misc.no_more_plate", 2.5f, 1f);

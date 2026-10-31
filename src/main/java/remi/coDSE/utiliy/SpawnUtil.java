@@ -1,10 +1,10 @@
 package remi.coDSE.utiliy;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import remi.coDSE.core.CoDSE;
 
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Random;
 
 public class SpawnUtil {
-    static CoDSE plugin = CoDSE.getInstance();
-    static Random random = new Random();
+    static final CoDSE plugin = CoDSE.getInstance();
+    static final Random random = new Random();
 
     // type-safe casting ? i barely know her !
     @SuppressWarnings("unchecked") public static List<List<Integer>> SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
@@ -28,7 +28,7 @@ public class SpawnUtil {
         return SpawnLocations;
     }
 
-    public static void setSpawnLocations(@NotNull List<List<Integer>> NewSpawnLocations) {
+    public static void setSpawnLocations(@NotNull final List<List<Integer>> NewSpawnLocations) {
         SpawnListSize = NewSpawnLocations.size();
         plugin.getConfig().set("spawns", NewSpawnLocations);
         plugin.saveConfig();
@@ -37,17 +37,15 @@ public class SpawnUtil {
         SpawnLocations = (List<List<Integer>>) plugin.getConfig().getList("spawns");
     }
 
-    public static void Respawn(Player player) {
+    public static void Respawn(final Player player) {
         player.setGameMode(GameMode.ADVENTURE);
 
-        int perk = PlayerUtil.getPlayerData(player).getPerk();
+        final int perk = PlayerUtil.getPlayerData(player).getPerk();
 
         List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
-        new BukkitRunnable() { // gotta wait one (1) tick so the player loads
-            public void run() {
-                player.teleport(new Location(player.getWorld(), SpawnLocation.get(0)+0.5, SpawnLocation.get(1), SpawnLocation.get(2)+0.5));
-                PlayerUtil.ApplyPerk(perk, player);
-            }
-        }.runTask(CoDSE.getInstance());
+        Bukkit.getServer().getScheduler().runTask(plugin, () -> {
+            player.teleport(new Location(player.getWorld(), SpawnLocation.get(0)+0.5, SpawnLocation.get(1), SpawnLocation.get(2)+0.5));
+            PlayerUtil.ApplyPerk(perk, player);
+        });
     }
 }

@@ -18,9 +18,9 @@ public class PlayerUtil {
     // PlayerData functions
     private static final Map<String, PlayerData> PlayerData = new HashMap<>();
 
-    public static PlayerData getPlayerData(@NonNull Player player) {
+    public static PlayerData getPlayerData(@NonNull final Player player) {
         if(!PlayerData.containsKey(player.getUniqueId().toString())) {
-            PlayerData data = new PlayerData();
+            final PlayerData data = new PlayerData();
             PlayerData.put(player.getUniqueId().toString(), data);
             return data;
         }
@@ -28,7 +28,7 @@ public class PlayerUtil {
 
     }
 
-    public static void setPlayerData(Player player, PlayerData data) {
+    public static void setPlayerData(final Player player, final PlayerData data) {
         if(data == null) PlayerData.remove(player.getUniqueId().toString());
         else PlayerData.put(player.getUniqueId().toString(), data);
     }
@@ -43,7 +43,7 @@ public class PlayerUtil {
     private static final PotionEffect slow_fall = new PotionEffect(PotionEffectType.SLOW_FALLING, PotionEffect.INFINITE_DURATION, 0, false, false);
     private static final PotionEffect saturation = new PotionEffect(PotionEffectType.SATURATION, PotionEffect.INFINITE_DURATION, 0, false, false);
 
-    public static void ApplyPerk(int perk, @NonNull Player player) {
+    public static void ApplyPerk(final int perk, @NonNull final Player player) {
         switch (perk) {
             case 1: //staminup -> speed+
                 Objects.requireNonNull(player.getAttribute(Attribute.MOVEMENT_SPEED)).setBaseValue(0.15);

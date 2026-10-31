@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Random;
 
 public class PhasetwoUtil {
-    static Random random = new Random();
+    static final Random random = new Random();
 
-    public static void Phase2(Player player) {
+    public static void Phase2(final Player player) {
         PlayerUtil.ApplyPerk(PlayerUtil.getPlayerData(player).getPerk(), player);
         RememberSon(player);
     }
 
-    private static void RememberSon(Player player) {
+    private static void RememberSon(final Player player) {
         // 0s -> blindness for 46s, stopped for 46s, immunity for 46s
         // 22s -> remember son dying is gay title
         // 48s -> adr for 30s
@@ -47,7 +47,7 @@ public class PhasetwoUtil {
 
     }
 
-    private static void NeverBackDownNeverWhat(Player player) { // TODO: actually work on ts, only keeping AEE meme for now
+    private static void NeverBackDownNeverWhat(final Player player) { // TODO: actually work on ts, only keeping AEE meme for now
         player.addPotionEffects(List.of(blindness_8s, stop_8s, immunity_8s));
         final Title.Times times = Title.Times.times(Duration.ofMillis(3000), Duration.ofMillis(1000), Duration.ofMillis(2500));
         final Title title = Title.title(Component.text("Lets not give up just yet", NamedTextColor.WHITE), Component.empty(), times);

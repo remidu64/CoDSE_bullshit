@@ -25,7 +25,7 @@ public final class CoDSE extends JavaPlugin {
     public static CoDSE getInstance() {
         return instance;
     }
-    public static Server server = Bukkit.getServer();
+    public static final Server server = Bukkit.getServer();
 
     @Override
     public void onEnable() {

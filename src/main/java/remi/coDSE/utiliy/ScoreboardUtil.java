@@ -17,21 +17,21 @@ public class ScoreboardUtil {
 
     public static final Map<UUID, FastBoard> scoreboards = new HashMap<>();
 
-    public static FastBoard getScoreboard(Player player) {
+    public static FastBoard getScoreboard(final Player player) {
         if(!scoreboards.containsKey(player.getUniqueId())) {
-            FastBoard scoreboard = new FastBoard(player);
+            final FastBoard scoreboard = new FastBoard(player);
             scoreboards.put(player.getUniqueId(), scoreboard);
             return scoreboard;
         }
         return scoreboards.get(player.getUniqueId());
     }
 
-    public static void SetScoreboard(Player player,  FastBoard scoreboard) {
+    public static void SetScoreboard(final Player player,  final FastBoard scoreboard) {
         if(scoreboard == null) scoreboards.remove(player.getUniqueId());
         else scoreboards.put(player.getUniqueId(), scoreboard);
     }
 
-    public static void UpdateScoreboard( FastBoard scoreboard) throws UserDoesNotExistException {
+    public static void UpdateScoreboard(final FastBoard scoreboard) throws UserDoesNotExistException {
         scoreboard.updateLines(
                 emptyLine,
                 GeneralUtil.deserialize(String.format("<gradient:#00ff00:#118c4f>Balance: %s P</gradient>", Economy.getMoneyExact(scoreboard.getPlayer().getUniqueId()))),

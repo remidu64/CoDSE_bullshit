@@ -6,7 +6,6 @@ import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.deecaad.weaponmechanics.WeaponMechanicsAPI;
 import net.ess3.api.MaxMoneyException;
 import net.kyori.adventure.title.Title;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -26,7 +25,7 @@ import java.util.Random;
 public class KillUtil {
     static final Title.Times times = Title.Times.times(Duration.ofMillis(250), Duration.ofMillis(2500), Duration.ofMillis(250));
 
-    public static void HandlePointsAndShit(Player player, int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    public static void HandlePointsAndShit(final Player player, final int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
 
         GiveKillstreakItem(player, kills);
         GiveArmor(player);
@@ -76,8 +75,8 @@ public class KillUtil {
         t2chestplate.setItemMeta(meta);
     }
 
-    private static void GiveArmor(@NotNull Player player) {
-        PlayerInventory inventory = player.getInventory();
+    private static void GiveArmor(@NotNull final Player player) {
+        final PlayerInventory inventory = player.getInventory();
 
         // 1/8 chance to get armor
         // then 1/50 to get reactive armor
@@ -117,7 +116,7 @@ public class KillUtil {
         }
     }
 
-    private static void GiveUserItem(@NotNull Player player) {
+    private static void GiveUserItem(@NotNull final Player player) {
         // give user items
         switch (random.nextInt(7)) {
             case 0 -> {
@@ -152,73 +151,59 @@ public class KillUtil {
         }
     }
 
-    private static void GiveMoneyandPoints(@NotNull Player player, int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    private static void GiveMoneyandPoints(@NotNull final Player player, final int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
         // give points and money
-        AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 50);
-        Economy.add(player.getUniqueId(), BigDecimal.valueOf(100));
         int money = 100;
         int points = 50;
 
         if (kills >= 5) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 10);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(40));
             points += 10;
             money += 40;
         }
 
         if (kills >= 10) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 20);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(80));
             points += 20;
             money += 80;
         }
 
         if (kills >= 20) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 40);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(160));
             points += 40;
             money += 160;
         }
 
         if (kills >= 30) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 60);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(240));
             points += 60;
             money += 240;
         }
 
         if (kills >= 50) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 100);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(400));
             points += 100;
             money += 400;
         }
 
         if (kills >= 75) {
-            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), 150);
-            Economy.add(player.getUniqueId(), BigDecimal.valueOf(600));
             points += 150;
             money += 600;
         }
+        AlonsoLeaguesAPI.addPoints(player.getUniqueId(), points);
+        Economy.add(player.getUniqueId(), BigDecimal.valueOf(money));
         GeneralUtil.sendMessage(player,"<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
     }
 
-    private static void Fish(Player player) {
+    private static void Fish(final Player player) {
         // 1/69420 chance of getting the fish
         if (random.nextInt(69420) == 0) {
             WeaponMechanicsAPI.giveWeapon("ADMINjustno", player);
-            Title title = Title.title(GeneralUtil.deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), GeneralUtil.deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
+            final Title title = Title.title(GeneralUtil.deserialize("<color:#FF0000><b>%s HAS OBTAINED THE FISH</b></color>".formatted(player.getName())), GeneralUtil.deserialize("<color:#FF0000><b>RUN WHILST YOU STILL CAN</b></color>"), times);
             CoDSE.server.showTitle(title);
         }
     }
 
-    private static void GiveKillstreakItem(@NotNull Player player, int kills) {
+    private static void GiveKillstreakItem(@NotNull final Player player, final int kills) {
         if (kills >= 1) {
             if (kills % 5 == 0) {
                 player.playSound(player.getLocation(), "minecraft:misc.tf_domination", 10, 1);
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                   GeneralUtil.sendMessage(p, String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills));
-                }
+                GeneralUtil.sendMessage(CoDSE.server, String.format("<color:#55ff55>%s</color> is on a killstreak of <color:#ff0000>%s</color>!", player.getName(), kills));
             }
             if (kills % 7 == 0) {
                 WeaponMechanicsAPI.giveWeapon("Panzerfaust30", player);

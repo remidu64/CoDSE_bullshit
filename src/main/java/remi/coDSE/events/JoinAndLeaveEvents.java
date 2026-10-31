@@ -19,10 +19,10 @@ public class JoinAndLeaveEvents implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        PlayerData data = new PlayerData();
+        final Player player = event.getPlayer();
+        final PlayerData data = new PlayerData();
 
-        int saved_perk = plugin.getConfig().getInt(player.getUniqueId() + ".perk");
+        final int saved_perk = plugin.getConfig().getInt(player.getUniqueId() + ".perk");
 
         if (saved_perk == 0) { // saved_perk being 0 means the player joined for the first time, gotta add config for em
             plugin.getConfig().set(player.getUniqueId() + ".perk", -1);
@@ -36,19 +36,19 @@ public class JoinAndLeaveEvents implements Listener {
 
         PlayerUtil.setPlayerData(player, data);
 
-        FastBoard scoreboard = new FastBoard(player);
+        final FastBoard scoreboard = new FastBoard(player);
         scoreboard.updateTitle(GeneralUtil.deserialize("<color:#FFFF00><b>CODSE</b></color>"));
         ScoreboardUtil.SetScoreboard(player, scoreboard);
 
-        event.joinMessage(GeneralUtil.deserialize("<color:#FFFF00>%s has joined the hellhole</color>".formatted(player.displayName())));
+        event.joinMessage(GeneralUtil.deserialize("<color:#FFFF00>%s has joined the hellhole</color>".formatted(player.getName())));
 
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         //clean up shit when the player leaves
-        Player player = event.getPlayer();
-        event.quitMessage(GeneralUtil.deserialize("<color:#FFFF00>%s is gonna touch grass</color>".formatted(player.displayName())));
+        final Player player = event.getPlayer();
+        event.quitMessage(GeneralUtil.deserialize("<color:#FFFF00>%s is gonna touch grass</color>".formatted(player.getName())));
 
         PlayerUtil.setPlayerData(player, null);
         ScoreboardUtil.SetScoreboard(player, null);
