@@ -1,45 +1,40 @@
 package remi.coDSE.commands;
 
-import org.bukkit.Bukkit;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
-import remi.coDSE.utiliy.GeneralUtil;
 
 import java.util.Objects;
 
-public class MedicCommand implements CommandExecutor {
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
-        if (command.getName().equalsIgnoreCase("medic")) {
-            return false;
-        }
+@SuppressWarnings("UnstableApiUsage") public class MedicCommand{
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+        return Commands.literal("medic")
+                .then(Commands.argument("target", ArgumentTypes.player()))
+                .executes(MedicCommand::Medic)
+                .build();
+    }
 
-        if (args.length != 1) {
-            GeneralUtil.sendMessage(sender,"<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s provided)</color>".formatted(args.length));
-            return false;
-        }
+    private static int Medic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+        final double playerHealth = target.getHealth();
 
-        Player player = Bukkit.getPlayer(args[0]);
-        if (player == null) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
-            return false;
-        }
-
-        double playerHealth = player.getHealth();
-
-        if  (playerHealth <= Objects.requireNonNull(player.getAttribute(Attribute.MAX_HEALTH)).getValue()-32) {
-            player.setHealth(player.getHealth() + 32);
+        if  (playerHealth <= Objects.requireNonNull(target.getAttribute(Attribute.MAX_HEALTH)).getValue()-32) {
+            target.setHealth(target.getHealth() + 32);
         }
         else {
-            player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.MAX_HEALTH)).getValue());
+            target.setHealth(Objects.requireNonNull(target.getAttribute(Attribute.MAX_HEALTH)).getValue());
         }
 
-        player.playSound(player.getLocation(), "minecraft:misc.medic", 0.6f, 1f);
+        target.playSound(target.getLocation(), "minecraft:misc.medic", 0.6f, 1f);
 
-        return true;
+        return Command.SINGLE_SUCCESS;
     }
 }
