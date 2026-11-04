@@ -42,7 +42,7 @@ public class SpawnUtil {
 
         final int perk = PlayerUtil.getPlayerData(player).getPerk();
 
-        List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
+        final List<Integer> SpawnLocation = SpawnLocations.get(random.nextInt(SpawnListSize));
         Bukkit.getServer().getScheduler().runTask(plugin, () -> {
             player.teleport(new Location(player.getWorld(), SpawnLocation.get(0)+0.5, SpawnLocation.get(1), SpawnLocation.get(2)+0.5));
             PlayerUtil.ApplyPerk(perk, player);

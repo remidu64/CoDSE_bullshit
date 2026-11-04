@@ -1,41 +1,33 @@
 package remi.coDSE.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.SpawnUtil;
 
-public class RespawnCommand implements CommandExecutor {
+@SuppressWarnings("UnstableApiUsage") public class RespawnCommand{
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+        return Commands.literal("respawn")
+                .then(Commands.argument("target", ArgumentTypes.player()))
+                    .executes(RespawnCommand::RespawnPlayer)
+                    .build();
+    }
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NonNull [] args) {
-        if (!command.getName().equalsIgnoreCase("respawn")) {
-            return false;
-        }
+    private static int RespawnPlayer(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+        final CommandSender sender = context.getSource().getSender();
 
-        if (args.length == 0) {
-            GeneralUtil.sendMessage(sender, "<color:#FFFF00>Usage: /respawn <player></color>");
-            return false;
-        }
-
-        if (args.length != 1) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Incorrect amount of arguments (1 expected, %s found)</color>".formatted(args.length));
-            return false;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
-        if (player == null) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
-            return false;
-        }
-
-        SpawnUtil.Respawn(player);
-        GeneralUtil.sendMessage(sender, "<color:#00FF00>Respawned %s </color>".formatted(args[0]));
-        return true;
+        SpawnUtil.Respawn(target);
+        GeneralUtil.sendMessage(sender, "<color:#00FF00>Respawned %s </color>".formatted(target.getName()));
+        return Command.SINGLE_SUCCESS;
     }
 }

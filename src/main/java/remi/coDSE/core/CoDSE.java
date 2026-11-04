@@ -11,7 +11,6 @@ import remi.coDSE.events.DeathAndRespawnEvents;
 import remi.coDSE.events.JoinAndLeaveEvents;
 import remi.coDSE.utiliy.ScoreboardUtil;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class CoDSE extends JavaPlugin {

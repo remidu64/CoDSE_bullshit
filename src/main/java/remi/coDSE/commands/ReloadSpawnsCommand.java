@@ -17,8 +17,8 @@ import remi.coDSE.utiliy.SpawnUtil;
                 .build();
     }
 
-    private static int ReloadSpawns(CommandContext<CommandSourceStack> context){
-        CommandSender sender = context.getSource().getSender();
+    private static int ReloadSpawns(final CommandContext<CommandSourceStack> context){
+        final CommandSender sender = context.getSource().getSender();
 
         SpawnUtil.reloadSpawnLocations();
         GeneralUtil.sendMessage(sender, "<color:#FF0000>Reloaded spawn locations</color>");
