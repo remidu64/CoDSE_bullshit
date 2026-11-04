@@ -17,8 +17,8 @@ import remi.coDSE.utiliy.SpawnUtil;
     public static LiteralCommandNode<CommandSourceStack> createCommand() {
         return Commands.literal("respawn")
                 .then(Commands.argument("target", ArgumentTypes.player()))
-                    .executes(RespawnCommand::RespawnPlayer)
-                    .build();
+                .executes(RespawnCommand::RespawnPlayer)
+                .build();
     }
 
     private static int RespawnPlayer(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

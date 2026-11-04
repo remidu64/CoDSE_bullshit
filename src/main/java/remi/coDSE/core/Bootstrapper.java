@@ -5,6 +5,7 @@ import io.papermc.paper.plugin.bootstrap.PluginBootstrap;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import remi.coDSE.commands.ReloadSpawnsCommand;
 import remi.coDSE.commands.RespawnCommand;
+import remi.coDSE.commands.SetKillstreakCommand;
 
 @SuppressWarnings("UnstableApiUsage")
 public class Bootstrapper implements PluginBootstrap {
@@ -14,6 +15,7 @@ public class Bootstrapper implements PluginBootstrap {
         context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             event.registrar().register(ReloadSpawnsCommand.createCommand());
             event.registrar().register(RespawnCommand.createCommand());
+            event.registrar().register(SetKillstreakCommand.createCommand());
         });
     }
 }
