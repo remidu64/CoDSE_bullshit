@@ -1,39 +1,35 @@
 package remi.coDSE.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 import remi.coDSE.data.PlayerData;
-import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
-public class DeadshotDaiquiriTriggerCommand implements CommandExecutor {
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
-        if (!command.getName().equalsIgnoreCase("ddtrigger")) {
-            return false;
-        }
+@SuppressWarnings("UnstableApiUsage") public class DeadshotDaiquiriTriggerCommand{
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+        return Commands.literal("ddtrigger")
+                .then(Commands.argument("target", ArgumentTypes.player()))
+                .executes(DeadshotDaiquiriTriggerCommand::DeadshotDaiquiriTrigger)
+                .build();
+    }
 
-        if (args.length != 1) {
-            GeneralUtil.sendMessage(sender, "Error: Incorrect amount of arguments provided (1 expected, " + args.length + " provided)");
-            return false;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
-        if (player == null) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0]));
-            return false;
-        }
-
-        PlayerData data = PlayerUtil.getPlayerData(player);
+    private static int DeadshotDaiquiriTrigger(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+        final PlayerData data = PlayerUtil.getPlayerData(target);
 
         if (data.getPerk() == 5) {
             data.setDDTrigger(true);
-            PlayerUtil.setPlayerData(player, data);
+            PlayerUtil.setPlayerData(target, data);
         }
-        return true;
+
+        return Command.SINGLE_SUCCESS;
     }
 }

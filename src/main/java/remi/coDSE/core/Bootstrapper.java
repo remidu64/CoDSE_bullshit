@@ -16,6 +16,7 @@ public class Bootstrapper implements PluginBootstrap {
             event.registrar().register(SetKillstreakCommand.createCommand());
             event.registrar().register(MedicCommand.createCommand());
             event.registrar().register(AddSpawnCommand.createCommand());
+            event.registrar().register(DeadshotDaiquiriTriggerCommand.createCommand());
         });
     }
 }
