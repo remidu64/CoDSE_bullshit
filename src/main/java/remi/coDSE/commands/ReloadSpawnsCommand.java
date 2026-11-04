@@ -1,25 +1,28 @@
 package remi.coDSE.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.SpawnUtil;
 
 
-public class ReloadSpawnsCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String @NonNull [] args) {
-        if (command.getName().equalsIgnoreCase("reloadspawns")) {
-            return false;
-        }
+@SuppressWarnings("UnstableApiUsage") public class ReloadSpawnsCommand {
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+        return Commands.literal("reloadspawns")
+                .executes(ReloadSpawnsCommand::ReloadSpawns)
+                .build();
+    }
+
+    private static int ReloadSpawns(CommandContext<CommandSourceStack> context){
+        CommandSender sender = context.getSource().getSender();
 
         SpawnUtil.reloadSpawnLocations();
         GeneralUtil.sendMessage(sender, "<color:#FF0000>Reloaded spawn locations</color>");
 
-        return true;
-
+        return Command.SINGLE_SUCCESS;
     }
 }

@@ -15,7 +15,7 @@ public class DamageEvents implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        @Nullable Entity Edamager = event.getDamageSource().getCausingEntity();
+        @SuppressWarnings("UnstableApiUsage") @Nullable Entity Edamager = event.getDamageSource().getCausingEntity();
 
         if (Edamager instanceof Player) {
             playerDamager = (Player) Edamager;

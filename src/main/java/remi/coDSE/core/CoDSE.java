@@ -31,7 +31,6 @@ public final class CoDSE extends JavaPlugin {
     public void onEnable() {
         this.saveDefaultConfig();
 
-        loadCommands();
         loadEvents();
 
         getServer().getScheduler().runTaskTimer(this, () -> {
@@ -51,24 +50,6 @@ public final class CoDSE extends JavaPlugin {
     @Override
     public void onDisable() {
         logger.info("yeetus deletus");
-    }
-
-    private void loadCommands() {
-        logger.info("loading commands");
-        Objects.requireNonNull(getCommand("staminup")).setExecutor(new StaminupCommand());
-        Objects.requireNonNull(getCommand("juggernog")).setExecutor(new JuggernogCommand());
-        Objects.requireNonNull(getCommand("quickrevive")).setExecutor(new QuickReviveCommand());
-        Objects.requireNonNull(getCommand("feathercurse")).setExecutor(new FeatherCurseCommand());
-        Objects.requireNonNull(getCommand("addspawn")).setExecutor(new AddSpawnCommand());
-        Objects.requireNonNull(getCommand("medic")).setExecutor(new MedicCommand());
-        Objects.requireNonNull(getCommand("reloadspawns")).setExecutor(new ReloadSpawnsCommand());
-        Objects.requireNonNull(getCommand("respawn")).setExecutor(new RespawnCommand());
-        Objects.requireNonNull(getCommand("setkillstreak")).setExecutor(new SetKillstreakCommand());
-        Objects.requireNonNull(getCommand("deadshotdaiquiri")).setExecutor(new DeadshotDaiquiriCommand());
-        Objects.requireNonNull(getCommand("ddtrigger")).setExecutor(new DeadshotDaiquiriTriggerCommand());
-        Objects.requireNonNull(getCommand("stoppingrounds")).setExecutor(new StoppingRoundsCommand());
-        logger.info("commands loaded");
-
     }
 
     private void loadEvents() {
