@@ -11,14 +11,14 @@ public class Bootstrapper implements PluginBootstrap {
     @Override
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            event.registrar().register(ReloadSpawnsCommand.createCommand());
-            event.registrar().register(RespawnCommand.createCommand());
-            event.registrar().register(SetKillstreakCommand.createCommand());
-            event.registrar().register(MedicCommand.createCommand());
-            event.registrar().register(AddSpawnCommand.createCommand());
-            event.registrar().register(DeadshotDaiquiriTriggerCommand.createCommand());
-            event.registrar().register(StoppingRoundsCommand.createCommand());
-            event.registrar().register(PerkCommand.createCommand());
+            event.registrar().register(ReloadSpawnsCommand.ReloadSpawns);
+            event.registrar().register(RespawnCommand.Respawn);
+            event.registrar().register(SetKillstreakCommand.SetKillstreak);
+            event.registrar().register(MedicCommand.Medic);
+            event.registrar().register(AddSpawnCommand.AddSpawn);
+            event.registrar().register(DeadshotDaiquiriTriggerCommand.DeadshotDaiquiriTrigger);
+            event.registrar().register(StoppingRoundsCommand.StoppingRounds);
+            event.registrar().register(PerkCommand.Perk);
         });
     }
 }

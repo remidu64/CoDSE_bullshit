@@ -20,16 +20,13 @@ import remi.coDSE.utiliy.KillUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class SetKillstreakCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("setkillstreak")
+    public static final LiteralCommandNode<CommandSourceStack> SetKillstreak = Commands.literal("setkillstreak")
                 .then(Commands.argument("target", ArgumentTypes.player()))
                 .then(Commands.argument("amount", IntegerArgumentType.integer()))
-                .executes(context -> SetKillstreak(context, IntegerArgumentType.getInteger(context, "amount")))
+                .executes(context -> SetKillstreakLogic(context, IntegerArgumentType.getInteger(context, "amount")))
                 .build();
 
-    }
-
-    private static int SetKillstreak(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
+    private static int SetKillstreakLogic(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final PlayerData data = PlayerUtil.getPlayerData(target);

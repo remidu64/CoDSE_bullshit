@@ -14,14 +14,12 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 @SuppressWarnings("UnstableApiUsage") public class MedicCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("medic")
+    public static final LiteralCommandNode<CommandSourceStack> Medic = Commands.literal("medic")
                 .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(MedicCommand::Medic)
+                .executes(MedicCommand::MedicLogic)
                 .build();
-    }
 
-    private static int Medic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int MedicLogic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final double playerHealth = target.getHealth();

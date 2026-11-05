@@ -15,22 +15,20 @@ import remi.coDSE.utiliy.PlayerUtil;
 @SuppressWarnings("UnstableApiUsage") public class PerkCommand {
     static final CoDSE plugin = CoDSE.getInstance();
 
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("perk")
+    public static final LiteralCommandNode<CommandSourceStack> Perk = Commands.literal("perk")
                 .then(Commands.literal("staminup")
-                        .executes(context -> SetPerk(context, 1, "Staminup")))
+                        .executes(context -> SetPerkLogic(context, 1, "Staminup")))
                 .then(Commands.literal("quickrevive")
-                        .executes(context -> SetPerk(context, 2, "Quick Revive")))
+                        .executes(context -> SetPerkLogic(context, 2, "Quick Revive")))
                 .then(Commands.literal("juggernog")
-                        .executes(context -> SetPerk(context, 3, "Juggernog")))
+                        .executes(context -> SetPerkLogic(context, 3, "Juggernog")))
                 .then(Commands.literal("featherscurse")
-                        .executes(context -> SetPerk(context, 4, "Feather's Curse ")))
+                        .executes(context -> SetPerkLogic(context, 4, "Feather's Curse ")))
                 .then(Commands.literal("deadshotdaiquiri")
-                        .executes(context -> SetPerk(context, 5, "DeadShot Daiquiri")))
+                        .executes(context -> SetPerkLogic(context, 5, "DeadShot Daiquiri")))
                 .build();
-    }
 
-    @SuppressWarnings("SameReturnValue") private static int SetPerk(final CommandContext<CommandSourceStack> context, final int perk, final String perk_name){
+    @SuppressWarnings("SameReturnValue") private static int SetPerkLogic(final CommandContext<CommandSourceStack> context, final int perk, final String perk_name){
         final CommandSender sender = context.getSource().getSender();
 
         if(!(sender instanceof Player player)) {

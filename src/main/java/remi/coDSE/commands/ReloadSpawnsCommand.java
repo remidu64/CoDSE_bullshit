@@ -11,13 +11,11 @@ import remi.coDSE.utiliy.SpawnUtil;
 
 
 @SuppressWarnings("UnstableApiUsage") public class ReloadSpawnsCommand {
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("reloadspawns")
-                .executes(ReloadSpawnsCommand::ReloadSpawns)
+    public static final LiteralCommandNode<CommandSourceStack> ReloadSpawns = Commands.literal("reloadspawns")
+                .executes(ReloadSpawnsCommand::ReloadSpawnsLogic)
                 .build();
-    }
 
-    private static int ReloadSpawns(final CommandContext<CommandSourceStack> context){
+    private static int ReloadSpawnsLogic(final CommandContext<CommandSourceStack> context){
         final CommandSender sender = context.getSource().getSender();
 
         SpawnUtil.reloadSpawnLocations();

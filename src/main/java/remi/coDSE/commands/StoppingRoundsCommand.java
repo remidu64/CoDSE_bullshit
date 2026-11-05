@@ -14,19 +14,17 @@ import remi.coDSE.data.PlayerData;
 import remi.coDSE.utiliy.PlayerUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class StoppingRoundsCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("stoppingrounds")
+    public static LiteralCommandNode<CommandSourceStack> StoppingRounds = Commands.literal("stoppingrounds")
                 .then(Commands.argument("target", ArgumentTypes.player())
                         .then(Commands.literal("set")
                                 .then(Commands.argument("amount", IntegerArgumentType.integer())))
-                        .executes(context -> SetStoppingRounds(context, IntegerArgumentType.getInteger(context, "amount")))
+                        .executes(context -> SetStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))
                         .then(Commands.literal("add")
                                 .then(Commands.argument("amount", IntegerArgumentType.integer())))
-                        .executes(context ->  AddStoppingRounds(context, IntegerArgumentType.getInteger(context, "amount")))
+                        .executes(context ->  AddStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))
                 ).build();
-    }
 
-    private static int SetStoppingRounds(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
+    private static int SetStoppingRoundsLogic(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final PlayerData data = PlayerUtil.getPlayerData(target);
@@ -36,7 +34,7 @@ import remi.coDSE.utiliy.PlayerUtil;
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int AddStoppingRounds(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
+    private static int AddStoppingRoundsLogic(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final PlayerData data = PlayerUtil.getPlayerData(target);

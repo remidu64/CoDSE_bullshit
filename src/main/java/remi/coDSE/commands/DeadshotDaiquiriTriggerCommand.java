@@ -13,14 +13,12 @@ import remi.coDSE.data.PlayerData;
 import remi.coDSE.utiliy.PlayerUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class DeadshotDaiquiriTriggerCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("ddtrigger")
+    public static final LiteralCommandNode<CommandSourceStack> DeadshotDaiquiriTrigger = Commands.literal("ddtrigger")
                 .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(DeadshotDaiquiriTriggerCommand::DeadshotDaiquiriTrigger)
+                .executes(DeadshotDaiquiriTriggerCommand::DeadshotDaiquiriTriggerLogic)
                 .build();
-    }
 
-    private static int DeadshotDaiquiriTrigger(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int DeadshotDaiquiriTriggerLogic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final PlayerData data = PlayerUtil.getPlayerData(target);

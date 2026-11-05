@@ -17,16 +17,14 @@ import remi.coDSE.utiliy.SpawnUtil;
 import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage") public class AddSpawnCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand(){
-        return Commands.literal("addspawn")
+    public static final LiteralCommandNode<CommandSourceStack> AddSpawn = Commands.literal("addspawn")
                 .then(Commands.argument("x", IntegerArgumentType.integer()))
                 .then(Commands.argument("y", IntegerArgumentType.integer()))
                 .then(Commands.argument("z", IntegerArgumentType.integer()))
-                .executes(context -> AddSpawn(context, IntegerArgumentType.getInteger(context, "x"), IntegerArgumentType.getInteger(context, "y"), IntegerArgumentType.getInteger(context, "z")))
+                .executes(context -> AddSpawnLogic(context, IntegerArgumentType.getInteger(context, "x"), IntegerArgumentType.getInteger(context, "y"), IntegerArgumentType.getInteger(context, "z")))
                 .build();
-    }
 
-    private static int AddSpawn(final CommandContext<CommandSourceStack> context, final int x, final int y, final int z){
+    private static int AddSpawnLogic(final CommandContext<CommandSourceStack> context, final int x, final int y, final int z){
         final CommandSender sender = context.getSource().getSender();
 
         List<List<Integer>> SpawnLocations = SpawnUtil.getSpawnLocations();

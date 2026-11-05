@@ -14,14 +14,12 @@ import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.SpawnUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class RespawnCommand{
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("respawn")
+    public static final LiteralCommandNode<CommandSourceStack> Respawn = Commands.literal("respawn")
                 .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(RespawnCommand::RespawnPlayer)
+                .executes(RespawnCommand::RespawnPlayerLogic)
                 .build();
-    }
 
-    private static int RespawnPlayer(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int RespawnPlayerLogic(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
         final Player target = resolver.resolve(context.getSource()).getFirst();
         final CommandSender sender = context.getSource().getSender();
