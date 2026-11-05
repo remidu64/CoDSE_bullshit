@@ -15,8 +15,8 @@ import remi.coDSE.utiliy.SpawnUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class RespawnCommand{
     public static final LiteralCommandNode<CommandSourceStack> Respawn = Commands.literal("respawn")
-                .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(RespawnCommand::RespawnPlayerLogic)
+                .then(Commands.argument("target", ArgumentTypes.player())
+                    .executes(RespawnCommand::RespawnPlayerLogic))
                 .build();
 
     private static int RespawnPlayerLogic(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

@@ -15,8 +15,8 @@ import java.util.Objects;
 
 @SuppressWarnings("UnstableApiUsage") public class MedicCommand{
     public static final LiteralCommandNode<CommandSourceStack> Medic = Commands.literal("medic")
-                .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(MedicCommand::MedicLogic)
+                .then(Commands.argument("target", ArgumentTypes.player())
+                    .executes(MedicCommand::MedicLogic))
                 .build();
 
     private static int MedicLogic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

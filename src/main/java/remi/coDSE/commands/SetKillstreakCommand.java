@@ -18,9 +18,9 @@ import remi.coDSE.utiliy.PlayerUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class SetKillstreakCommand{
     public static final LiteralCommandNode<CommandSourceStack> SetKillstreak = Commands.literal("setkillstreak")
-                .then(Commands.argument("target", ArgumentTypes.player()))
-                .then(Commands.argument("amount", IntegerArgumentType.integer()))
-                .executes(context -> SetKillstreakLogic(context, IntegerArgumentType.getInteger(context, "amount")))
+                .then(Commands.argument("target", ArgumentTypes.player())
+                    .then(Commands.argument("amount", IntegerArgumentType.integer())
+                        .executes(context -> SetKillstreakLogic(context, IntegerArgumentType.getInteger(context, "amount")))))
                 .build();
 
     private static int SetKillstreakLogic(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {

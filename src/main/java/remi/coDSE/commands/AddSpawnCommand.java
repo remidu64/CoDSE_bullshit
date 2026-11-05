@@ -18,10 +18,10 @@ import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage") public class AddSpawnCommand{
     public static final LiteralCommandNode<CommandSourceStack> AddSpawn = Commands.literal("addspawn")
-                .then(Commands.argument("x", IntegerArgumentType.integer()))
-                .then(Commands.argument("y", IntegerArgumentType.integer()))
-                .then(Commands.argument("z", IntegerArgumentType.integer()))
-                .executes(context -> AddSpawnLogic(context, IntegerArgumentType.getInteger(context, "x"), IntegerArgumentType.getInteger(context, "y"), IntegerArgumentType.getInteger(context, "z")))
+                .then(Commands.argument("x", IntegerArgumentType.integer())
+                    .then(Commands.argument("y", IntegerArgumentType.integer())
+                        .then(Commands.argument("z", IntegerArgumentType.integer())
+                            .executes(context -> AddSpawnLogic(context, IntegerArgumentType.getInteger(context, "x"), IntegerArgumentType.getInteger(context, "y"), IntegerArgumentType.getInteger(context, "z"))))))
                 .build();
 
     private static int AddSpawnLogic(final CommandContext<CommandSourceStack> context, final int x, final int y, final int z){

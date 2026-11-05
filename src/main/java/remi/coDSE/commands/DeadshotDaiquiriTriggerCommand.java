@@ -14,8 +14,8 @@ import remi.coDSE.utiliy.PlayerUtil;
 
 @SuppressWarnings("UnstableApiUsage") public class DeadshotDaiquiriTriggerCommand{
     public static final LiteralCommandNode<CommandSourceStack> DeadshotDaiquiriTrigger = Commands.literal("ddtrigger")
-                .then(Commands.argument("target", ArgumentTypes.player()))
-                .executes(DeadshotDaiquiriTriggerCommand::DeadshotDaiquiriTriggerLogic)
+                .then(Commands.argument("target", ArgumentTypes.player())
+                    .executes(DeadshotDaiquiriTriggerCommand::DeadshotDaiquiriTriggerLogic))
                 .build();
 
     private static int DeadshotDaiquiriTriggerLogic(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

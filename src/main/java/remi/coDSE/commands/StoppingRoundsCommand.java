@@ -17,11 +17,11 @@ import remi.coDSE.utiliy.PlayerUtil;
     public static LiteralCommandNode<CommandSourceStack> StoppingRounds = Commands.literal("stoppingrounds")
                 .then(Commands.argument("target", ArgumentTypes.player())
                         .then(Commands.literal("set")
-                                .then(Commands.argument("amount", IntegerArgumentType.integer())))
-                        .executes(context -> SetStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))
+                                .then(Commands.argument("amount", IntegerArgumentType.integer())
+                                    .executes(context -> SetStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))))
                         .then(Commands.literal("add")
-                                .then(Commands.argument("amount", IntegerArgumentType.integer())))
-                        .executes(context ->  AddStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))
+                                .then(Commands.argument("amount", IntegerArgumentType.integer())
+                                    .executes(context ->  AddStoppingRoundsLogic(context, IntegerArgumentType.getInteger(context, "amount")))))
                 ).build();
 
     private static int SetStoppingRoundsLogic(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {

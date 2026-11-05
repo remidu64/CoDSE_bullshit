@@ -1,8 +1,5 @@
 package remi.coDSE.events;
 
-import com.earth2me.essentials.api.NoLoanPermittedException;
-import com.earth2me.essentials.api.UserDoesNotExistException;
-import net.ess3.api.MaxMoneyException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -41,7 +38,7 @@ public class DeathAndRespawnEvents implements Listener {
     }
 
     @EventHandler
-    public void onDeath(@NotNull final PlayerDeathEvent event) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    public void onDeath(@NotNull final PlayerDeathEvent event){
         final Player victim = event.getEntity();
         victim.stopSound("meme.encounter");
         final PlayerData victim_data = PlayerUtil.getPlayerData(victim);
