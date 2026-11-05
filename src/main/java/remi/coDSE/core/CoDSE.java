@@ -33,7 +33,7 @@ public final class CoDSE extends JavaPlugin {
         loadEvents();
 
         getServer().getScheduler().runTaskTimer(this, () -> {
-            for(FastBoard scoreboard: ScoreboardUtil.scoreboards.values()) {
+            for(final FastBoard scoreboard: ScoreboardUtil.scoreboards.values()) {
                 try {
                     ScoreboardUtil.UpdateScoreboard(scoreboard);
                 } catch (UserDoesNotExistException e) {

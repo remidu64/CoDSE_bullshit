@@ -23,13 +23,14 @@ import java.util.Random;
 
 public class DeathAndRespawnEvents implements Listener {
     static final Random random = new Random();
+    static final CoDSE plugin = CoDSE.getInstance();
 
     @EventHandler
-    public void OnRespawn(@NotNull PlayerRespawnEvent event) {
+    public void OnRespawn(@NotNull final PlayerRespawnEvent event) {
         final Player player = event.getPlayer();
         if(PlayerUtil.getPlayerData(player).isPhase2()) {
-            Location location = PlayerUtil.getPlayerData(player).getLocation();
-            Bukkit.getServer().getScheduler().runTask(CoDSE.getInstance(), () -> {
+            final Location location = PlayerUtil.getPlayerData(player).getLocation();
+            Bukkit.getServer().getScheduler().runTask(plugin, () -> {
                 player.teleport(location);
                 PhasetwoUtil.Phase2(player);
             });
@@ -40,13 +41,13 @@ public class DeathAndRespawnEvents implements Listener {
     }
 
     @EventHandler
-    public void onDeath(@NotNull PlayerDeathEvent event) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    public void onDeath(@NotNull final PlayerDeathEvent event) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
         final Player victim = event.getEntity();
         victim.stopSound("meme.encounter");
         final PlayerData victim_data = PlayerUtil.getPlayerData(victim);
 
         if(random.nextInt(5) == 0 && !victim_data.isPhase2() && victim_data.getKills() >= 10) {
-            Location location = victim.getLocation();
+            final Location location = victim.getLocation();
             victim_data.setPhase2(true);
             victim_data.setLocation(location);
             return;

@@ -15,8 +15,10 @@ import java.util.Random;
 
 public class PhasetwoUtil {
     static final Random random = new Random();
+    static final CoDSE plugin = CoDSE.getInstance();
 
     public static void Phase2(final Player player) {
+
         PlayerUtil.ApplyPerk(PlayerUtil.getPlayerData(player).getPerk(), player);
         RememberSon(player);
     }
@@ -31,11 +33,11 @@ public class PhasetwoUtil {
         final Title remember_son = Title.title(GeneralUtil.deserialize("<color:#FFFFFF>Remember son</color>"), Component.empty(), times);
         final Title dying_is_gay = Title.title(GeneralUtil.deserialize("<color:#FFFFFF>Dying is gay</color>"), Component.empty(), times);
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.playSound(player.getLocation(), "meme.encounter", 1.0f, 1.0f), 40);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.playSound(player.getLocation(), "meme.encounter", 1.0f, 1.0f), 40);
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.showTitle(remember_son), 430);
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.showTitle(dying_is_gay), 515);
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.addPotionEffects(List.of(adr_speed, adr_resistance)), 960);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.showTitle(remember_son), 430);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.showTitle(dying_is_gay), 515);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.addPotionEffects(List.of(adr_speed, adr_resistance)), 960);
 
     }
 
@@ -44,8 +46,8 @@ public class PhasetwoUtil {
         final Title.Times times = Title.Times.times(Duration.ofMillis(3000), Duration.ofMillis(1000), Duration.ofMillis(2500));
         final Title title = Title.title(Component.text("Lets not give up just yet", NamedTextColor.WHITE), Component.empty(), times);
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.showTitle(title), 40);
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CoDSE.getInstance(), () -> player.addPotionEffects(List.of(adr_speed, adr_resistance)), 160);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.showTitle(title), 40);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.addPotionEffects(List.of(adr_speed, adr_resistance)), 160);
     }
 
     private static final PotionEffect blindness_8s = new PotionEffect(PotionEffectType.BLINDNESS, 160, 0, false, false);

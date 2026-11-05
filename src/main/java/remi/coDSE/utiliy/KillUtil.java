@@ -145,7 +145,7 @@ public class KillUtil {
             }
             case 6 -> {
                 WeaponMechanicsAPI.giveWeapon("IMPACTGRENADE", player);
-               GeneralUtil.sendMessage(player, "<color:#7A7A7A>+Impact</color> <color#308D30>Grenade</color>");
+               GeneralUtil.sendMessage(player, "<color:#7A7A7A>+Impact</color> <color:#308D30>Grenade</color>");
             }
             default -> GeneralUtil.sendMessage(player, "<color:#FFFFFF>+ nothing lmao</color>");
         }

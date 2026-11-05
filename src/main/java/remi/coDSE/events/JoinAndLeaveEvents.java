@@ -15,10 +15,10 @@ import remi.coDSE.utiliy.ScoreboardUtil;
 // this class handles events related to joining and leaving the server
 
 public class JoinAndLeaveEvents implements Listener {
-    CoDSE plugin = CoDSE.getInstance();
+    static final CoDSE plugin = CoDSE.getInstance();
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         final PlayerData data = new PlayerData();
 
@@ -45,7 +45,7 @@ public class JoinAndLeaveEvents implements Listener {
     }
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent event) {
+    public void onLeave(final PlayerQuitEvent event) {
         //clean up shit when the player leaves
         final Player player = event.getPlayer();
         event.quitMessage(GeneralUtil.deserialize("<color:#FFFF00>%s is gonna touch grass</color>".formatted(player.getName())));

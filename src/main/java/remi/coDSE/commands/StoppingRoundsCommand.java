@@ -1,62 +1,48 @@
 package remi.coDSE.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 import remi.coDSE.data.PlayerData;
-import remi.coDSE.utiliy.GeneralUtil;
 import remi.coDSE.utiliy.PlayerUtil;
 
-public class StoppingRoundsCommand implements CommandExecutor {
-    public boolean onCommand(@NotNull CommandSender sender, @NonNull Command command, @NonNull String label, String @NonNull [] args) {
-        if (command.getName().equalsIgnoreCase("stoppingrounds")) {
-            return false;
-        }
+@SuppressWarnings("UnstableApiUsage") public class StoppingRoundsCommand{
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+        return Commands.literal("stoppingrounds")
+                .then(Commands.argument("target", ArgumentTypes.player())
+                        .then(Commands.literal("set")
+                                .then(Commands.argument("amount", IntegerArgumentType.integer())))
+                        .executes(context -> SetStoppingRounds(context, IntegerArgumentType.getInteger(context, "amount")))
+                        .then(Commands.literal("add")
+                                .then(Commands.argument("amount", IntegerArgumentType.integer())))
+                        .executes(context ->  AddStoppingRounds(context, IntegerArgumentType.getInteger(context, "amount")))
+                ).build();
+    }
 
-        if (args.length == 0) {
-            GeneralUtil.sendMessage(sender, "<color:#FFFF00>Usage: /stoppingrounds <player> <set/add> <integer></color>");
-            return false;
-        }
+    private static int SetStoppingRounds(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+        final PlayerData data = PlayerUtil.getPlayerData(target);
 
-        if (args.length != 3) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Incorrect amount of argument (3 expected, %s provided)</color>".formatted(args.length));
-            return false;
-        }
+        data.setStopping_rounds(amount);
 
-        Player player = Bukkit.getPlayer(args[0]);
+        return Command.SINGLE_SUCCESS;
+    }
 
-        if(player == null) {
-            GeneralUtil.sendMessage(sender, String.format("<color:#FF0000>ERROR: Player %s not found</color>".formatted(args[0])));
-            return false;
-           }
+    private static int AddStoppingRounds(final CommandContext<CommandSourceStack> context, final int amount) throws CommandSyntaxException {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+        final PlayerData data = PlayerUtil.getPlayerData(target);
 
-        if (GeneralUtil.isNotNumeric(args[2])) {
-            GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: 3rd argument '%s' isn't an integer</color>".formatted(args[2]));
-            return false;
-        }
+        data.addStopping_rounds(amount);
 
-        PlayerData data = PlayerUtil.getPlayerData(player);
-
-        switch (args[1]) {
-            case "add" -> {
-                data.addStopping_rounds(Integer.parseInt(args[2]));
-                return true;
-            }
-
-            case "set" -> {
-                data.setStopping_rounds(Integer.parseInt(args[2]));
-                return true;
-            }
-
-            default -> {
-                GeneralUtil.sendMessage(sender, "<color:#FF0000>ERROR: Expected argument 'add' or 'set', got '%s' instead</color>".formatted(args[1]));
-                return false;
-            }
-
-        }
+        return Command.SINGLE_SUCCESS;
     }
 }
