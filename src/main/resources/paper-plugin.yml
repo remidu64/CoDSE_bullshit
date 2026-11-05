@@ -6,5 +6,3 @@ description: shit plugin held together with hopes and dreams
 author: remidu64
 
 api-version: '1.21.4'
-
-bootstrapper: remi.coDSE.core.Bootstrapper

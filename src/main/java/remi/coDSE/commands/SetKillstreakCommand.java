@@ -1,7 +1,5 @@
 package remi.coDSE.commands;
 
-import com.earth2me.essentials.api.NoLoanPermittedException;
-import com.earth2me.essentials.api.UserDoesNotExistException;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,7 +9,6 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
-import net.ess3.api.MaxMoneyException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import remi.coDSE.data.PlayerData;
@@ -35,11 +32,7 @@ import remi.coDSE.utiliy.PlayerUtil;
         data.setKills(amount);
         PlayerUtil.setPlayerData(target, data);
 
-        try {
-            KillUtil.HandlePointsAndShit(target, amount);
-        } catch (MaxMoneyException | NoLoanPermittedException | UserDoesNotExistException e) {
-            throw new RuntimeException(e);
-        }
+        KillUtil.HandlePointsAndShit(target, amount);
 
         GeneralUtil.sendMessage(sender, "<color:#00FF00>Set %s's killstreak to %s</color>".formatted(target.getName(), amount));
         return Command.SINGLE_SUCCESS;

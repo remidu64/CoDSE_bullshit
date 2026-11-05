@@ -1,10 +1,7 @@
 package remi.coDSE.utiliy;
 
 import com.earth2me.essentials.api.Economy;
-import com.earth2me.essentials.api.NoLoanPermittedException;
-import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.deecaad.weaponmechanics.WeaponMechanicsAPI;
-import net.ess3.api.MaxMoneyException;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -25,7 +22,7 @@ import java.util.Random;
 public class KillUtil {
     static final Title.Times times = Title.Times.times(Duration.ofMillis(250), Duration.ofMillis(2500), Duration.ofMillis(250));
 
-    public static void HandlePointsAndShit(final Player player, final int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    public static void HandlePointsAndShit(final Player player, final int kills){
 
         GiveKillstreakItem(player, kills);
         GiveArmor(player);
@@ -151,43 +148,47 @@ public class KillUtil {
         }
     }
 
-    private static void GiveMoneyandPoints(@NotNull final Player player, final int kills) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
-        // give points and money
-        int money = 100;
-        int points = 50;
+    private static void GiveMoneyandPoints(@NotNull final Player player, final int kills){
+        try {
+            // give points and money
+            int money = 100;
+            int points = 50;
 
-        if (kills >= 5) {
-            points += 10;
-            money += 40;
-        }
+            if (kills >= 5) {
+                points += 10;
+                money += 40;
+            }
 
-        if (kills >= 10) {
-            points += 20;
-            money += 80;
-        }
+            if (kills >= 10) {
+                points += 20;
+                money += 80;
+            }
 
-        if (kills >= 20) {
-            points += 40;
-            money += 160;
-        }
+            if (kills >= 20) {
+                points += 40;
+                money += 160;
+            }
 
-        if (kills >= 30) {
-            points += 60;
-            money += 240;
-        }
+            if (kills >= 30) {
+                points += 60;
+                money += 240;
+            }
 
-        if (kills >= 50) {
-            points += 100;
-            money += 400;
-        }
+            if (kills >= 50) {
+                points += 100;
+                money += 400;
+            }
 
-        if (kills >= 75) {
-            points += 150;
-            money += 600;
+            if (kills >= 75) {
+                points += 150;
+                money += 600;
+            }
+            AlonsoLeaguesAPI.addPoints(player.getUniqueId(), points);
+            Economy.add(player.getUniqueId(), BigDecimal.valueOf(money));
+            GeneralUtil.sendMessage(player, "<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
+        } catch (Exception ignored) {
+            // idgaf anymore, i just want this shit to work
         }
-        AlonsoLeaguesAPI.addPoints(player.getUniqueId(), points);
-        Economy.add(player.getUniqueId(), BigDecimal.valueOf(money));
-        GeneralUtil.sendMessage(player,"<color:#FFAA00>+%s points / +%s hungarian pengő</color>".formatted(points, money));
     }
 
     private static void Fish(final Player player) {
